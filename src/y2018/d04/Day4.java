@@ -3,7 +3,6 @@ package y2018.d04;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.TreeSet;
 
 import adventOfCode.AdventOfCode;
