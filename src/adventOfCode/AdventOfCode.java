@@ -11,7 +11,7 @@ public abstract class AdventOfCode {
 		} catch (Exception e) {
 			System.err.println("Some Error");
 			e.printStackTrace();
-		}
+		} 
 		timeStamp = System.currentTimeMillis()- timeStamp;
 		System.out.println("Part 1 Solution took " + timeStamp + " milliseconds");
 		
