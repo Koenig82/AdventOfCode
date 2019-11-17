@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.util.HashSet;
 
 import adventOfCode.AdventOfCode;
-import y2018.d02.Day2;
 
 public class Day3 extends AdventOfCode{
 

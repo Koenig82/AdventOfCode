@@ -3,10 +3,10 @@ package y2018.d04;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.TreeSet;
 
 import adventOfCode.AdventOfCode;
-import y2018.d03.Day3;
 
 public class Day4 extends AdventOfCode{
 
@@ -42,6 +42,7 @@ public class Day4 extends AdventOfCode{
 		} finally {
 		    reader.close();
 		}
+	
 		for(Event event : eventlist) {
 			System.out.println("Guardid: "+event.guardId+
 							   ", isAwake: "+event.isAwake+
@@ -50,9 +51,7 @@ public class Day4 extends AdventOfCode{
 							   ", Hour: "+event.timestamp.get(Calendar.HOUR_OF_DAY)+
 							   ", Minute: "+event.timestamp.get(Calendar.MINUTE));
 			
-			
 		}
-		
 	}
 
 	@Override
