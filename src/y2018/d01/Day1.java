@@ -15,22 +15,19 @@ public class Day1 extends AdventOfCode {
 	public static void main(String[] args) throws Exception {
 		new Day1().run();
 	}
-
-	@Override
-	public void work() throws Exception {
-		//System.out.println(part1());
-		System.out.println(part2());
-	}
 	
-	public int part1() throws Exception {
+	@Override
+	public void part1() throws Exception {
 		
 		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/d01/Day1Input.txt"));
 		List<Integer> collect = readAllLines.stream().map(Integer::parseInt).collect(Collectors.toList());
 		
-		return collect.stream().mapToInt(Integer::intValue).sum();
+		System.out.println(collect.stream().mapToInt(Integer::intValue).sum());
+		return;
 	}
 	
-	public int part2() throws Exception {
+	@Override
+	public void part2() throws Exception {
 		
 		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/d01/Day1Input.txt"));
 		Set<Integer> results = new HashSet<>();
@@ -43,7 +40,8 @@ public class Day1 extends AdventOfCode {
 				numberAsInt = Integer.parseInt(numberAsString);
 				sum = sum + numberAsInt;
 				if(!results.add(sum)) {
-					return sum;
+					System.out.println(sum);
+					return;
 				}
 			}
 		}		
