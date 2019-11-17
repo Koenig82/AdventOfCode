@@ -19,10 +19,16 @@ public class Day1 extends AdventOfCode {
 	@Override
 	public void part1() throws Exception {
 		
+		int sum = 0;
 		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/d01/Day1Input.txt"));
-		List<Integer> collect = readAllLines.stream().map(Integer::parseInt).collect(Collectors.toList());
+		for(String line : readAllLines) {
+			sum += Integer.parseInt(line);
+		} 
+		System.out.println(sum);
 		
-		System.out.println(collect.stream().mapToInt(Integer::intValue).sum());
+		//List<Integer> collect = readAllLines.stream().map(Integer::parseInt).collect(Collectors.toList());
+		//System.out.println(collect.stream().mapToInt(Integer::intValue).sum());
+		
 		return;
 	}
 	
