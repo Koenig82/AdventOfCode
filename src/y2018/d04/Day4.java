@@ -56,8 +56,8 @@ public class Day4 extends AdventOfCode{
 	}
 	
 	private TreeSet<Event> getEvents() throws NumberFormatException, IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/day04Input"));
-		//BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/testinput.txt"));
+		//BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/day04Input"));
+		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/testinput.txt"));
 		TreeSet<Event> eventlist = new TreeSet<>();
 		try {
 			String line;
@@ -129,6 +129,7 @@ public class Day4 extends AdventOfCode{
 	}
 	
 	private void calculateData(HashMap<Integer,int[]> shifts) {
+		
 		int mostMinutesAsleep = 0;
 		int tempMinutes;
 		int leaderGuard = -1;
@@ -142,15 +143,15 @@ public class Day4 extends AdventOfCode{
 				leaderGuard = entry.getKey();
 				mostMinutesAsleep = tempMinutes;
 			}
-			System.out.println("Guard "+entry.getKey()+" slept a total of "+tempMinutes+" minutes");
+			//System.out.println("Guard "+entry.getKey()+" slept a total of "+tempMinutes+" minutes");
 		}
 
 		int savedIndex = 0;
 		int highestMinuteCount=0;
 		for(int i = 0; i < shifts.get(leaderGuard).length; i++) {
-			System.out.println("value at index "+i+" is "+shifts.get(leaderGuard)[i]);
+			//System.out.println("value at index "+i+" is "+shifts.get(leaderGuard)[i]);
 			if(shifts.get(leaderGuard)[i] > highestMinuteCount) {
-				System.out.println("assigning "+i+" as the leading minute");
+				//System.out.println("assigning "+i+" as the leading minute");
 				highestMinuteCount = shifts.get(leaderGuard)[i];
 				savedIndex = i;
 			}
