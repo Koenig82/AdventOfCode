@@ -19,8 +19,16 @@ public class Day4 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		
+		//wierd bug at 09-01....somehow more entries than input
 		TreeSet<Event> eventlist = getEvents();
+		for (Event event : eventlist) {
+			System.out.println("["+event.timestamp.get(Calendar.YEAR)+"-"+
+							   ""+event.timestamp.get(Calendar.MONTH)+"-"+
+							   ""+event.timestamp.get(Calendar.DAY_OF_MONTH)+" -"+
+							   " "+event.timestamp.get(Calendar.HOUR_OF_DAY)+
+							   "-"+event.timestamp.get(Calendar.MINUTE)+"] "+
+							   "ID: " + event.guardId + ", isAwake: " + event.isAwake);
+		}
 		HashMap<Integer,int[]> shifts = getSleepingShifts(eventlist);
 		calculateData(shifts);
 	}
@@ -56,8 +64,8 @@ public class Day4 extends AdventOfCode{
 	}
 	
 	private TreeSet<Event> getEvents() throws NumberFormatException, IOException {
-		//BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/day04Input"));
-		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/testinput.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/day04Input"));
+		//BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/testinput.txt"));
 		TreeSet<Event> eventlist = new TreeSet<>();
 		try {
 			String line;
