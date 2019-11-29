@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import adventOfCode.AdventOfCode;
-import javafx.util.Pair;
+import adventOfCode.Pair;
 
 public class Day2 extends AdventOfCode{
 
@@ -19,7 +19,7 @@ public class Day2 extends AdventOfCode{
 	public void part1() throws Exception {
 		
 		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/d02/Day2Input.txt"));
-		HashMap<Character,Integer> counts = new HashMap<>();
+		Map<Character,Integer> counts = new HashMap<>();
 
 		int twos = 0;
 		int threes = 0;
@@ -60,8 +60,8 @@ public class Day2 extends AdventOfCode{
 		
 		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/d02/Day2Input.txt"));
 		
-		Pair<String,Integer> defaultValue = new Pair<String,Integer>("",0);
-		HashMap<String, Pair<String,Integer>> greatestMatch = new HashMap<String,Pair<String,Integer>>();
+		Pair<String,Integer> defaultValue = new Pair<>("",0);
+		Map<String, Pair<String,Integer>> greatestMatch = new HashMap<>();
 		int count = 0;
 		
 		for (String word : readAllLines) {
@@ -75,8 +75,8 @@ public class Day2 extends AdventOfCode{
 						count++;
 					}
 				}
-				if(count > greatestMatch.get(word).getValue() && count < 26) {
-					Pair<String,Integer> newValue = new Pair<String,Integer>(compareWith,count);
+				if(count > greatestMatch.get(word).getB() && count < 26) {
+					Pair<String,Integer> newValue = new Pair<>(compareWith,count);
 					greatestMatch.replace(word, newValue);
 				}
 			}
@@ -89,10 +89,10 @@ public class Day2 extends AdventOfCode{
 		StringBuilder result = new StringBuilder();
 		for (Map.Entry<String, Pair<String,Integer>> entry : greatestMatch.entrySet()) {
 
-		    if(entry.getValue().getValue() > greatestScore) {
-		    	greatestScore = entry.getValue().getValue();
+		    if(entry.getValue().getB() > greatestScore) {
+		    	greatestScore = entry.getValue().getB();
 		    	idA = entry.getKey();
-		    	idB = entry.getValue().getKey();
+		    	idB = entry.getValue().getA();
 		    }
 
 		}
