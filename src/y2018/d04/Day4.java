@@ -141,34 +141,25 @@ public class Day4 extends AdventOfCode{
 	
 	private void calculateData2(HashMap<Integer,int[]> shifts) {
 
-		int mostMinutesAsleep = 0;
-		int tempMinutes;
+		int tempMinutes = 0;
+		int minute = -1;;
 		int leaderGuard = -1;
 		for(Entry<Integer, int[]> entry : shifts.entrySet()) {
-			
-			
-			
-			tempMinutes =0;
+
 			for(int i = 0;i<entry.getValue().length;i++) {
-				tempMinutes+=entry.getValue()[i];
+				if(entry.getValue()[i] > tempMinutes) {
+					tempMinutes = entry.getValue()[i];
+					leaderGuard = entry.getKey();
+					minute = i;
+				}
+				
 			}
-			if(tempMinutes > mostMinutesAsleep) {
-				leaderGuard = entry.getKey();
-				mostMinutesAsleep = tempMinutes;
-			}
+			
 		}
 
-		int savedIndex = 0;
-		int highestMinuteCount=0;
-		for(int i = 0; i < shifts.get(leaderGuard).length; i++) {
-			if(shifts.get(leaderGuard)[i] > highestMinuteCount) {
-				highestMinuteCount = shifts.get(leaderGuard)[i];
-				savedIndex = i;
-			}
-		}
-		System.out.println("guard most asleep = "+leaderGuard+" with "+mostMinutesAsleep+" minutes");
-		System.out.println("The minute guard "+leaderGuard+" spent asleep the most was minute "+savedIndex);
-		System.out.println("resulting number = "+(leaderGuard*savedIndex));
+		System.out.println("The minute most spent asleep by any guard was minute "+minute+
+						   " by guard "+leaderGuard+" with "+tempMinutes+" minutes");
+		System.out.println("Result = "+(leaderGuard*minute));
 	}
 	
  	private class Event implements Comparable<Event>{
