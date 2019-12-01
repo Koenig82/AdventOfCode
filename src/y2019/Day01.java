@@ -42,12 +42,10 @@ public class Day01 extends AdventOfCode{
 				totalFuelNeeded += moduleFuel;	
 			}
 		} 
-		System.out.println("Result = "+totalFuelNeeded);	
-		
+		System.out.println("Result = "+totalFuelNeeded);		
 	}
 	
 	private List<String> getInput() throws IOException{
 		return Files.readAllLines(Paths.get("src/y2019/Day01Input.txt"));
 	}
-
 }
