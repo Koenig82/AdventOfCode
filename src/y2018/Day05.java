@@ -33,7 +33,8 @@ public class Day05 extends AdventOfCode{
 
 	@Override
 	public void part2() throws Exception {
-		
+		char[] input = getInput();
+		input = removeAllElementsOfType()
 		
 	}
 
@@ -53,7 +54,7 @@ public class Day05 extends AdventOfCode{
 		return string.toCharArray();
 	}
 	
-	public static char[] removeTwoElements(char[] array, int index) { 
+	private static char[] removeTwoElements(char[] array, int index) { 
 
 		if (array == null
 				|| index < 0
@@ -71,5 +72,36 @@ public class Day05 extends AdventOfCode{
 			returnArray[j++] = array[i]; 
 		} 
 		return returnArray;
+	}
+	
+	private static char[] removeOneElement(char[] array, int index) { 
+
+		if (array == null
+				|| index < 0
+				|| index >= array.length) { 
+
+			return array; 
+		} 
+		char[] returnArray = new char[array.length - 1]; 
+
+		for (int i = 0, j = 0; i < array.length; i++) { 
+
+			if (i == index) { 
+				continue; 
+			} 
+			returnArray[j++] = array[i]; 
+		} 
+		return returnArray;
+	}
+	
+	public static char[] removeAllElementsOfType(char[] array, char lowerCase) { 
+		
+		for(int i = array.length-1; i > -1; i--) {
+			if((int)array[i] == lowerCase ||
+					(int)array[i] == (int)array[i+1]-32) {
+				array = removeOneElement(array,i);
+			}
+		}
+		return array;
 	}
 }
