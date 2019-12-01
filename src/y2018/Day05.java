@@ -1,15 +1,9 @@
 package y2018;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Stream;
 
 import adventOfCode.AdventOfCode;
@@ -39,7 +33,7 @@ public class Day05 extends AdventOfCode{
 
 	@Override
 	public void part2() throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -67,15 +61,15 @@ public class Day05 extends AdventOfCode{
 
 			return array; 
 		} 
-		char[] anotherArray = new char[array.length - 2]; 
+		char[] returnArray = new char[array.length - 2]; 
 
-		for (int i = 0, k = 0; i < array.length; i++) { 
+		for (int i = 0, j = 0; i < array.length; i++) { 
 
 			if (i == index || i == index+1) { 
 				continue; 
 			} 
-			anotherArray[k++] = array[i]; 
+			returnArray[j++] = array[i]; 
 		} 
-		return anotherArray;
+		return returnArray;
 	}
 }
