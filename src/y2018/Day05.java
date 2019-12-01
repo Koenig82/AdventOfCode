@@ -21,8 +21,11 @@ public class Day05 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		char[] input = getInput();
+		//char[] input = {'a','b','c','A','a','c','t'};
 		for(int i = 0; i < input.length-1; i++) {
-			if(input[i] == input[i+1]) {
+			if((int)input[i] == (int)input[i+1]-32) {
+				System.out.println("Char at index "+i+" = "+input[i]+", Char at index "+(i+1)+" = "+input[i+1]);
+				System.out.println("Int at index "+i+" = "+(int)input[i]+", Int at index "+(i+1)+" = "+(int)input[i+1]);
 				System.out.println("samma char");
 			}
 		}
