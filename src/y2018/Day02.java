@@ -1,4 +1,4 @@
-package y2018.d02;
+package y2018;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,16 +9,16 @@ import java.util.Map;
 import adventOfCode.AdventOfCode;
 import adventOfCode.Pair;
 
-public class Day2 extends AdventOfCode{
+public class Day02 extends AdventOfCode{
 
 	public static void main(String[] args) throws Exception {
-		new Day2().run();
+		new Day02().run();
 	}
 
 	@Override
 	public void part1() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/d02/Day2Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/Day02Input.txt"));
 		Map<Character,Integer> counts = new HashMap<>();
 
 		int twos = 0;
@@ -51,14 +51,14 @@ public class Day2 extends AdventOfCode{
 				threesPoint++;
 			}
 		}
-		System.out.println(twosPoint*threesPoint);
+		System.out.println("Result = "+(twosPoint*threesPoint));
 		return;
 	}
 
 	@Override
 	public void part2() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/d02/Day2Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/Day02Input.txt"));
 		
 		Pair<String,Integer> defaultValue = new Pair<>("",0);
 		Map<String, Pair<String,Integer>> greatestMatch = new HashMap<>();
@@ -102,6 +102,6 @@ public class Day2 extends AdventOfCode{
 				count++;
 			}
 		}
-		System.out.println(result);	
+		System.out.println("Result = "+result);	
 	}
 }

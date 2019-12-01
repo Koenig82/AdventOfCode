@@ -1,4 +1,4 @@
-package y2018.d03;
+package y2018;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,10 +6,10 @@ import java.util.HashSet;
 
 import adventOfCode.AdventOfCode;
 
-public class Day3 extends AdventOfCode{
+public class Day03 extends AdventOfCode{
 
 	public static void main(String[] args) {
-		new Day3().run();
+		new Day03().run();
 
 	}
 
@@ -18,7 +18,7 @@ public class Day3 extends AdventOfCode{
 		int[][] cloth = new int[1000][1000];
 		int overlapcount= 0;
 		
-		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d03/day03Input"));
+		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/day03Input.txt"));
 		try {
 		    String line;
 		    while ((line = reader.readLine()) != null) {
@@ -48,7 +48,7 @@ public class Day3 extends AdventOfCode{
 		    }
 		} finally {
 		    reader.close();
-		    System.out.println("doubleinserts counted: " + overlapcount);
+		    System.out.println("Result = " + overlapcount);
 		}
 		
 	}
@@ -59,7 +59,7 @@ public class Day3 extends AdventOfCode{
 		
 		HashSet<Integer> candidates = new HashSet<>();
 		
-		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d03/day03Input"));
+		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/day03Input.txt"));
 		try {
 		    String line;
 		    while ((line = reader.readLine()) != null) {
@@ -95,7 +95,7 @@ public class Day3 extends AdventOfCode{
 		} finally {
 		    reader.close();
 		    for (Integer s : candidates) {
-		        System.out.println(s);
+		        System.out.println("Result = "+s);
 		    }
 		}
 		

@@ -1,4 +1,4 @@
-package y2018.d04;
+package y2018;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,11 +11,11 @@ import java.util.TreeSet;
 
 import adventOfCode.AdventOfCode;
 
-public class Day4 extends AdventOfCode{
+public class Day04 extends AdventOfCode{
 
 	public static void main(String[] args) {
 		
-		new Day4().run();
+		new Day04().run();
 	}
 	
 	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -51,7 +51,7 @@ public class Day4 extends AdventOfCode{
 	}
 	
 	private TreeSet<Event> getEvents() throws NumberFormatException, IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/d04/day04Input"));
+		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/day04Input.txt"));
 		
 		TreeSet<Event> eventlist = new TreeSet<>();
 		try {
@@ -134,9 +134,9 @@ public class Day4 extends AdventOfCode{
 				savedIndex = i;
 			}
 		}
-		System.out.println("guard most asleep = "+leaderGuard+" with "+mostMinutesAsleep+" minutes");
-		System.out.println("The minute guard "+leaderGuard+" spent asleep the most was minute "+savedIndex);
-		System.out.println("resulting number = "+(leaderGuard*savedIndex));
+		//System.out.println("guard most asleep = "+leaderGuard+" with "+mostMinutesAsleep+" minutes");
+		//System.out.println("The minute guard "+leaderGuard+" spent asleep the most was minute "+savedIndex);
+		System.out.println("Result = "+(leaderGuard*savedIndex));
 	}
 	
 	private void calculateData2(HashMap<Integer,int[]> shifts) {
@@ -157,8 +157,8 @@ public class Day4 extends AdventOfCode{
 			
 		}
 
-		System.out.println("The minute most spent asleep by any guard was minute "+minute+
-						   " by guard "+leaderGuard+" with "+tempMinutes+" minutes");
+		/*System.out.println("The minute most spent asleep by any guard was minute "+minute+
+						   " by guard "+leaderGuard+" with "+tempMinutes+" minutes");*/
 		System.out.println("Result = "+(leaderGuard*minute));
 	}
 	
