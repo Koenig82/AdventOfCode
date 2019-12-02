@@ -18,39 +18,32 @@ public class Day05 extends AdventOfCode{
 	public void part1() throws Exception {
 		
 		char[] input = getInput();
-		boolean done = false;
-		int removeCount = 0;
-		while(!done) {
-			done = true;
-			removeCount = 0;
-			for(int i = 0; i < input.length-1; i++) {
-				if((int)input[i] == (int)input[i+1]-32 ||
-						(int)input[i] == (int)input[i+1]+32) {
-					done = false;
-					input[i] = ' ';
-					input[i+1] = ' ';
-					removeCount+=2;
-				}
-			}
-			input = removeBlanks(input, removeCount);
-		}
-		System.out.println("Result = "+(input.length-1));
+		System.out.println("Result = "+reactPolymers(input));
 	}
 
 	@Override
 	public void part2() throws Exception {
-		char[] input = getInput();
-		//input = removeAllElementsOfType()
 		
+		char[] input = getInput();
+		int lowestResult = input.length;
+		int tempResult;
+		for(int i = 97; i <= 122; i++) {
+			input = getInput();
+			input = removeAllElementsOfType(input, i);
+			tempResult = reactPolymers(input);
+			if(tempResult < lowestResult) {
+				lowestResult = tempResult;
+			}
+		}
+		System.out.println("Result = "+lowestResult);
 	}
 
 	private char[] getInput() {
 		
 		StringBuilder stringBuilder = new StringBuilder();
-		
-		//try (Stream<String> stream = Files.lines( Paths.get("src/y2018/testinput.txt"), StandardCharsets.UTF_8)) {
+
         try (Stream<String> stream = Files.lines( Paths.get("src/y2018/Day05Input.txt"), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> stringBuilder.append(s).append("\n"));
+            stream.forEach(s -> stringBuilder.append(s));
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -58,6 +51,27 @@ public class Day05 extends AdventOfCode{
         String string = stringBuilder.toString();
 		
 		return string.toCharArray();
+	}
+	
+	private int reactPolymers(char[] array) {
+		
+		boolean done = false;
+		int removeCount = 0;
+		while(!done) {
+			done = true;
+			removeCount = 0;
+			for(int i = 0; i < array.length-1; i++) {
+				if((int)array[i] == (int)array[i+1]-32 ||
+						(int)array[i] == (int)array[i+1]+32) {
+					done = false;
+					array[i] = ' ';
+					array[i+1] = ' ';
+					removeCount+=2;
+				}
+			}
+			array = removeBlanks(array, removeCount);
+		}
+		return array.length;
 	}
 	
 	private char[] removeBlanks(char[] array, int removeCount) {
@@ -73,54 +87,16 @@ public class Day05 extends AdventOfCode{
 		return newArray;
 	}
 	
-	
-	private char[] removeTwoElements(char[] array, int index) { 
-		if (array == null
-				|| index < 0
-				|| index+1 >= array.length) { 
-
-			return array; 
-		} 
-		char[] returnArray = new char[array.length - 2]; 
-
-		for (int i = 0, j = 0; i < array.length; i++) { 
-
-			if (i == index || i == index+1) { 
-				continue; 
-			} 
-			returnArray[j++] = array[i]; 
-		} 
-		return returnArray;
-	}
-	
-	private char[] removeOneElement(char[] array, int index) { 
-
-		if (array == null
-				|| index < 0
-				|| index >= array.length) { 
-
-			return array; 
-		} 
-		char[] returnArray = new char[array.length - 1]; 
-
-		for (int i = 0, j = 0; i < array.length; i++) { 
-
-			if (i == index) { 
-				continue; 
-			} 
-			returnArray[j++] = array[i]; 
-		} 
-		return returnArray;
-	}
-	
-	private char[] removeAllElementsOfType(char[] array, char lowerCase) { 
+	private char[] removeAllElementsOfType(char[] array, int lowerCase) { 
 		
-		for(int i = array.length-1; i > -1; i--) {
+		int removeCount = 0;
+		for(int i = 0; i < array.length-1; i++) {
 			if((int)array[i] == lowerCase ||
-					(int)array[i] == (int)array[i+1]-32) {
-				array = removeOneElement(array,i);
+					(int)array[i] == lowerCase-32) {
+				array[i] = ' ';
+				removeCount++;
 			}
 		}
-		return array;
+		return removeBlanks(array, removeCount);
 	}
 }
