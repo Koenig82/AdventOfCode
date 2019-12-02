@@ -15,16 +15,20 @@ public class Day02 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
+		
 		int[] array = getInput();
-		preCalibratePart1(array);
-		int result = runMachine(array);
-		System.out.println(result);
+		
+		preCalibrateNoun(array,12);
+		preCalibrateVerb(array,2);
+
+		System.out.println("Result = "+runMachine(array));
 	}
 
 	@Override
 	public void part2() throws Exception {
+		
 		int[] array = getInput();
-		int result;
+		
 		for(int nounCount = 0;nounCount < 100;nounCount++) {
 			for(int verbCount = 0;verbCount<100;verbCount++) {
 				preCalibrateNoun(array,nounCount);
@@ -40,6 +44,7 @@ public class Day02 extends AdventOfCode{
 	}
 	
 	private int[] getInput() throws UnsupportedEncodingException, IOException {
+		
 		String input = new String(Files.readAllBytes(Paths.get("src/y2019/day02Input.txt")), "UTF-8");
 		String[] substrings = input.split(",");
 
@@ -71,11 +76,6 @@ public class Day02 extends AdventOfCode{
 	private int opcode2(int[] array, int index) {
 		array[array[index+3]] = array[array[index+1]] * array[array[index+2]];
 		return index+3;
-	}
-	
-	private void preCalibratePart1(int[] array) {
-		array[1] = 12;
-		array[2] = 2;
 	}
 	
 	private void preCalibrateNoun(int[] array, int x) {

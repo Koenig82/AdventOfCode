@@ -16,17 +16,23 @@ public class Day05 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
+		
 		char[] input = getInput();
 		boolean done = false;
+		int removeCount = 0;
 		while(!done) {
 			done = true;
-			for(int i = input.length-2; i > -1; i--) {
+			removeCount = 0;
+			for(int i = 0; i < input.length-1; i++) {
 				if((int)input[i] == (int)input[i+1]-32 ||
 						(int)input[i] == (int)input[i+1]+32) {
 					done = false;
-					input = removeTwoElements(input,i);
+					input[i] = ' ';
+					input[i+1] = ' ';
+					removeCount+=2;
 				}
 			}
+			input = removeBlanks(input, removeCount);
 		}
 		System.out.println("Result = "+(input.length-1));
 	}
@@ -54,8 +60,21 @@ public class Day05 extends AdventOfCode{
 		return string.toCharArray();
 	}
 	
-	private static char[] removeTwoElements(char[] array, int index) { 
-
+	private char[] removeBlanks(char[] array, int removeCount) {
+		
+		char[] newArray = new char[array.length-removeCount];
+		for(int i = 0, j = 0; i< array.length; i++) {
+			if(array[i] == ' ') {
+				
+			}else {
+				newArray[j++] = array[i];
+			}
+		}
+		return newArray;
+	}
+	
+	
+	private char[] removeTwoElements(char[] array, int index) { 
 		if (array == null
 				|| index < 0
 				|| index+1 >= array.length) { 
@@ -74,7 +93,7 @@ public class Day05 extends AdventOfCode{
 		return returnArray;
 	}
 	
-	private static char[] removeOneElement(char[] array, int index) { 
+	private char[] removeOneElement(char[] array, int index) { 
 
 		if (array == null
 				|| index < 0
@@ -94,7 +113,7 @@ public class Day05 extends AdventOfCode{
 		return returnArray;
 	}
 	
-	public static char[] removeAllElementsOfType(char[] array, char lowerCase) { 
+	private char[] removeAllElementsOfType(char[] array, char lowerCase) { 
 		
 		for(int i = array.length-1; i > -1; i--) {
 			if((int)array[i] == lowerCase ||
