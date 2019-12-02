@@ -34,7 +34,7 @@ public class Day05 extends AdventOfCode{
 	@Override
 	public void part2() throws Exception {
 		char[] input = getInput();
-		input = removeAllElementsOfType()
+		//input = removeAllElementsOfType()
 		
 	}
 
