@@ -31,9 +31,11 @@ public class Day03 extends AdventOfCode {
 	}
 
 	private List<Wire> getInput() throws UnsupportedEncodingException, IOException {
-
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2019/day03Input.txt"));
+		
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2019/testinput"));
+		//List<String> readAllLines = Files.readAllLines(Paths.get("src/y2019/day03Input.txt"));
 		List<Wire> wires = new ArrayList<>();
+		
 		for(String line : readAllLines) {
 			Wire wire = new Wire(line);
 			wires.add(wire);
@@ -58,45 +60,59 @@ public class Day03 extends AdventOfCode {
 	private class Wire{
 		List<Instruction> instructions;
 		int magnitudeR;
+		int magnitudeRmax;
+		
 		int magnitudeL;
+		int magnitudeLmax;
+		
 		int magnitudeU;
+		int magnitudeUmax;
+		
 		int magnitudeD;
+		int magnitudeDmax;
 
 		public Wire(String intructionData) {
 			instructions = new ArrayList<>();
-			magnitudeR = 0;
-			magnitudeL = 0;
-			magnitudeU = 0;
-			magnitudeD = 0;
 			
 			String[] substrings = intructionData.split(",");
 			int mag = 0;
 			char dir;
+			magnitudeR = 0;
+			magnitudeL = 0;
+			magnitudeU = 0;
+			magnitudeD = 0;
+			System.out.println(substrings.length);
 			for(String substring : substrings) {
+				
 				dir = substring.charAt(0);
+				mag = Integer.parseInt(substring.substring(1));
 				switch (dir) {
 				case 'R':
-					mag = Integer.parseInt(substring.substring(1));
-					magnitudeR += (mag-magnitudeL);
+					magnitudeR = magnitudeR + mag - magnitudeL;
+					System.out.println("Adding magnitudeR "+(mag-magnitudeL));
 					break;
 				case 'L':
-					mag = Integer.parseInt(substring.substring(1));
-					magnitudeL -= (mag+magnitudeR);
+					magnitudeL = magnitudeL + mag - magnitudeR;
+					System.out.println("Adding magnitudeL "+(mag-magnitudeR));
 					break;
 				case 'D':
-					mag = Integer.parseInt(substring.substring(1));
-					magnitudeD -= (mag+magnitudeU);
+					magnitudeD = magnitudeD + mag - magnitudeU;
+					System.out.println("Adding magnitudeD "+(mag-magnitudeU));
 					break;
 				case 'U':
-					mag = Integer.parseInt(substring.substring(1));
-					magnitudeU += (mag-magnitudeD);
+					magnitudeU = magnitudeU + mag - magnitudeD;
+					System.out.println("Adding magnitudeU "+(mag-magnitudeD));
 					break;
 
 				default:
 					break;
 				}
-				Instruction instruction = new Instruction(dir, mag);
+				instructions.add(new Instruction(dir, mag));
 			}
+			System.out.println("magR "+magnitudeR+" "+
+							   "magL "+magnitudeL+" "+
+							   "magD "+magnitudeD+" "+
+							   "magU "+magnitudeU);
 		}		
 	}
 	
