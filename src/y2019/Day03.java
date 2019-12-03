@@ -59,6 +59,7 @@ public class Day03 extends AdventOfCode {
 
 	private class Wire{
 		List<Instruction> instructions;
+		//exchange max to pos of each direction as a saved value to use when increasing total magnitude
 		int magnitudeR;
 		int magnitudeRmax;
 		
@@ -88,18 +89,30 @@ public class Day03 extends AdventOfCode {
 				mag = Integer.parseInt(substring.substring(1));
 				switch (dir) {
 				case 'R':
+					if(mag > magnitudeR) {
+						magnitudeRmax = mag;
+					}
 					magnitudeR = magnitudeR + mag - magnitudeL;
 					System.out.println("Adding magnitudeR "+(mag-magnitudeL));
 					break;
 				case 'L':
+					if(mag > magnitudeL) {
+						magnitudeLmax = mag;
+					}
 					magnitudeL = magnitudeL + mag - magnitudeR;
 					System.out.println("Adding magnitudeL "+(mag-magnitudeR));
 					break;
 				case 'D':
+					if(mag > magnitudeD) {
+						magnitudeDmax = mag;
+					}
 					magnitudeD = magnitudeD + mag - magnitudeU;
 					System.out.println("Adding magnitudeD "+(mag-magnitudeU));
 					break;
 				case 'U':
+					if(mag > magnitudeU) {
+						magnitudeUmax = mag;
+					}
 					magnitudeU = magnitudeU + mag - magnitudeD;
 					System.out.println("Adding magnitudeU "+(mag-magnitudeD));
 					break;
