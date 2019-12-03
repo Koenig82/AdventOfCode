@@ -40,6 +40,20 @@ public class Day03 extends AdventOfCode {
 		}
 		return wires;
 	}
+	
+	private class WireGrid{
+		char[][] grid;
+
+		public WireGrid(List<Wire> wires) {
+			
+			//find greatestmagnitude off each dir among wires to get gridsize
+			//walk out each wire and mark way (special mark at intersect. get nearest)
+			//perhaps intersection attribute?
+			for (Wire wire : wires) {
+				
+			}
+		}
+	}
 
 	private class Wire{
 		List<Instruction> instructions;
@@ -82,12 +96,10 @@ public class Day03 extends AdventOfCode {
 					break;
 				}
 				Instruction instruction = new Instruction(dir, mag);
-				System.out.println(instruction);
 			}
-			//instructions.add(new Instruction());
-		}
-		
+		}		
 	}
+	
 	private class Instruction{
 		char dir;
 		int length;
