@@ -42,7 +42,7 @@ public class Day05 extends AdventOfCode{
 		
 		StringBuilder stringBuilder = new StringBuilder();
 
-        try (Stream<String> stream = Files.lines( Paths.get("src/y2018/Day05Input.txt"), StandardCharsets.UTF_8)) {
+        try (Stream<String> stream = Files.lines( Paths.get("src/y2018/day05Input.txt"), StandardCharsets.UTF_8)) {
             stream.forEach(s -> stringBuilder.append(s));
         }
         catch (IOException e) {

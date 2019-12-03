@@ -20,7 +20,7 @@ public class Day01 extends AdventOfCode {
 	public void part1() throws Exception {
 		
 		int sum = 0;
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/Day01Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day01Input.txt"));
 		for(String line : readAllLines) {
 			sum += Integer.parseInt(line);
 		} 

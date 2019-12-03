@@ -18,7 +18,7 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/Day02Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day02Input.txt"));
 		Map<Character,Integer> counts = new HashMap<>();
 
 		int twos = 0;
