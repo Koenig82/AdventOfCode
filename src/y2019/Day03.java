@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import adventOfCode.AdventOfCode;
@@ -44,88 +46,31 @@ public class Day03 extends AdventOfCode {
 	}
 	
 	private class WireGrid{
-		char[][] grid;
+		Set<Position> wirePos = new TreeSet<>();
 
 		public WireGrid(List<Wire> wires) {
-			
-			//find greatestmagnitude off each dir among wires to get gridsize
-			//walk out each wire and mark way (special mark at intersect. get nearest)
-			//perhaps intersection attribute?
+
 			for (Wire wire : wires) {
 				
 			}
 		}
 	}
+	
+	private class Position{
+		
+	}
 
 	private class Wire{
 		List<Instruction> instructions;
-		//exchange max to pos of each direction as a saved value to use when increasing total magnitude
-		int magnitudeR;
-		int magnitudeRmax;
-		
-		int magnitudeL;
-		int magnitudeLmax;
-		
-		int magnitudeU;
-		int magnitudeUmax;
-		
-		int magnitudeD;
-		int magnitudeDmax;
 
 		public Wire(String intructionData) {
 			instructions = new ArrayList<>();
 			
 			String[] substrings = intructionData.split(",");
-			int mag = 0;
-			char dir;
-			magnitudeR = 0;
-			magnitudeL = 0;
-			magnitudeU = 0;
-			magnitudeD = 0;
 			System.out.println(substrings.length);
 			for(String substring : substrings) {
-				
-				dir = substring.charAt(0);
-				mag = Integer.parseInt(substring.substring(1));
-				switch (dir) {
-				case 'R':
-					if(mag > magnitudeR) {
-						magnitudeRmax = mag;
-					}
-					magnitudeR = magnitudeR + mag - magnitudeL;
-					System.out.println("Adding magnitudeR "+(mag-magnitudeL));
-					break;
-				case 'L':
-					if(mag > magnitudeL) {
-						magnitudeLmax = mag;
-					}
-					magnitudeL = magnitudeL + mag - magnitudeR;
-					System.out.println("Adding magnitudeL "+(mag-magnitudeR));
-					break;
-				case 'D':
-					if(mag > magnitudeD) {
-						magnitudeDmax = mag;
-					}
-					magnitudeD = magnitudeD + mag - magnitudeU;
-					System.out.println("Adding magnitudeD "+(mag-magnitudeU));
-					break;
-				case 'U':
-					if(mag > magnitudeU) {
-						magnitudeUmax = mag;
-					}
-					magnitudeU = magnitudeU + mag - magnitudeD;
-					System.out.println("Adding magnitudeU "+(mag-magnitudeD));
-					break;
-
-				default:
-					break;
-				}
-				instructions.add(new Instruction(dir, mag));
+				instructions.add(new Instruction(substring.charAt(0), Integer.parseInt(substring.substring(1))));
 			}
-			System.out.println("magR "+magnitudeR+" "+
-							   "magL "+magnitudeL+" "+
-							   "magD "+magnitudeD+" "+
-							   "magU "+magnitudeU);
 		}		
 	}
 	
