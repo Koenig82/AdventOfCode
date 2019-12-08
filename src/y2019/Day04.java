@@ -50,8 +50,7 @@ public class Day04 extends AdventOfCode{
 			return false;
 		}
 	}
-	// 1
-// 1 1 1 1 3 3
+
 	private boolean checkNumber2(int num) {
 		String number = Integer.toString(num);
 		boolean hasDouble = false;
