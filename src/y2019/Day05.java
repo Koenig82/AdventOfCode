@@ -48,11 +48,11 @@ public class Day05 extends AdventOfCode{
 	private int runMachine(int[]array) {
 		for(int i = 0;i < array.length; i++) {
 			if(array[i] == 1) {
-				i = opcode1(array, i, parameterMode);
+				i = opcode1(array, i);
 			}else if(array[i] == 2) {
-				i = opcode2(array, i, parameterMode);
+				i = opcode2(array, i);
 			}else if(array[i] == 3) {
-				i = opcode3(array, i, parameterMode);
+				i = opcode3(array, i);
 			}else if(array[i] == 99){
 				break;
 			}
@@ -60,17 +60,17 @@ public class Day05 extends AdventOfCode{
 		return array[0];
 	}
 	
-	private int opcode1(int[] array, int index, int mode) {
+	private int opcode1(int[] array, int index) {
 		array[array[index+3]] = array[array[index+1]] + array[array[index+2]];
 		return index+3;
 	}
 	
-	private int opcode2(int[] array, int index, int mode) {
+	private int opcode2(int[] array, int index) {
 		array[array[index+3]] = array[array[index+1]] * array[array[index+2]];
 		return index+3;
 	}
 	
-	private int opcode3(int[] array, int index, int mode) {
+	private int opcode3(int[] array, int index) {
 		array[array[index+1]] = array[index+1];
 		return index+1;
 	}
