@@ -11,7 +11,7 @@ import adventOfCode.AdventOfCode;
 public class Day05 extends AdventOfCode{
 	
 	private ArrayDeque<Integer> input = new ArrayDeque<>();
-	int[] parameterModes = new int[3];
+	int[] parameterModes = new int[2];
 	int[] machineCode;
 
 	public static void main(String[] args) {
@@ -23,6 +23,7 @@ public class Day05 extends AdventOfCode{
 		
 		getInstructions();
 		addInput(1);
+		parameterModes = new int[]{1,1};
 		System.out.println("Result = "+runMachine());
 	}
 
@@ -65,13 +66,37 @@ public class Day05 extends AdventOfCode{
 	}
 	
 	private int opcode1(int head) {
-		int[] parameters = modeSwitch(head);
+		int[] parameters = modeSwitch(head, 1);
 
-		machineCode[machineCode[head+3]] = parameters[0] + machineCode[machineCode[head+2]];
+		machineCode[machineCode[head+3]] = parameters[0] + parameters[1];
 		return head+3;
 	}
-	private int[] modeSwitch(int head) {
-		
+	private int[] modeSwitch(int head, int opCode) {
+		switch (opCode) {
+		case 1:
+			if(parameterModes[0] == 0) {
+				return new int[]{machineCode[machineCode[head+1]],
+								 machineCode[machineCode[head+2]],
+								 machineCode[machineCode[head+3]]};
+			}else if(parameterModes[0] == 1) {
+				return new int[]{machineCode[head+1],
+						 		 machineCode[head+2],
+						 		 machineCode[head+3]};
+			}
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		case 4:
+
+			break;
+		default:
+			throw new IllegalArgumentException("modeSwitch Error. unknown opcode: " + opCode);
+		}
+		return new int[] {1,1};
 		
 	}
 	private int opcode2(int[] array, int index) {
