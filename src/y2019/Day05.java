@@ -11,8 +11,8 @@ import adventOfCode.AdventOfCode;
 public class Day05 extends AdventOfCode{
 	
 	private ArrayDeque<Integer> input = new ArrayDeque<>();
-	int[] parameterModes = new int[2];
-	int[] machineCode;
+	private int[] parameterModes = new int[2];
+	private int[] machineCode;
 
 	public static void main(String[] args) {
 		new Day05().run();
@@ -23,7 +23,7 @@ public class Day05 extends AdventOfCode{
 		
 		getInstructions();
 		addInput(1);
-		parameterModes = new int[]{1,1};
+		parameterModes = new int[]{0,1};
 		System.out.println("Result = "+runMachine());
 	}
 
@@ -55,7 +55,7 @@ public class Day05 extends AdventOfCode{
 			if(machineCode[i] == 1) {
 				i = opcode1(i);
 			}else if(machineCode[i] == 2) {
-				i = opcode2(machineCode, i);
+				i = opcode2(i);
 			}else if(machineCode[i] == 3) {
 				i = opcode3(machineCode, i);
 			}else if(machineCode[i] == 99){
@@ -71,9 +71,21 @@ public class Day05 extends AdventOfCode{
 		machineCode[machineCode[head+3]] = parameters[0] + parameters[1];
 		return head+3;
 	}
+	private int opcode2(int head) {
+		int[] parameters = modeSwitch(head, 2);
+
+		machineCode[machineCode[head+3]] = parameters[0] * parameters[1];
+		return head+3;
+	}
+	private int opcode3(int[] array, int index) {
+		array[array[index+1]] = array[index+1];
+		return index;
+	}
 	private int[] modeSwitch(int head, int opCode) {
 		switch (opCode) {
 		case 1:
+		case 2:
+			//fixa att varje parameter har egen parametermode
 			if(parameterModes[0] == 0) {
 				return new int[]{machineCode[machineCode[head+1]],
 								 machineCode[machineCode[head+2]],
@@ -83,9 +95,6 @@ public class Day05 extends AdventOfCode{
 						 		 machineCode[head+2],
 						 		 machineCode[head+3]};
 			}
-			break;
-		case 2:
-
 			break;
 		case 3:
 
@@ -99,15 +108,7 @@ public class Day05 extends AdventOfCode{
 		return new int[] {1,1};
 		
 	}
-	private int opcode2(int[] array, int index) {
-		array[array[index+3]] = array[array[index+1]] * array[array[index+2]];
-		return index+3;
-	}
 	
-	private int opcode3(int[] array, int index) {
-		array[array[index+1]] = array[index+1];
-		return index;
-	}
 	
 	private void preCalibrateNoun(int[] array, int x) {
 		array[1] = x;
