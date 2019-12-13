@@ -1,4 +1,4 @@
-package y2019;
+package y2019.day01;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -46,6 +46,6 @@ public class Day01 extends AdventOfCode{
 	}
 	
 	private List<String> getInput() throws IOException{
-		return Files.readAllLines(Paths.get("src/y2019/Day01Input.txt"));
+		return Files.readAllLines(Paths.get("src/y2019/day01/Day01Input.txt"));
 	}
 }

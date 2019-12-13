@@ -1,4 +1,4 @@
-package y2019;
+package y2019.day03;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -39,7 +39,7 @@ public class Day03 extends AdventOfCode {
 
 	private List<Wire> getInput() throws UnsupportedEncodingException, IOException {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2019/day03Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2019/day03/day03Input.txt"));
 		List<Wire> wires = new ArrayList<>();
 		
 		for(String line : readAllLines) {

@@ -1,4 +1,4 @@
-package y2019;
+package y2019.day05;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -21,10 +21,13 @@ public class Day05 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		getInstructions();
+		IntCodeCPU cpu = new IntCodeCPU();
+		cpu.loadProgram();
+		cpu.addInput(1);
+		/*getInstructions();
 		addInput(1);
 		parameterModes = new int[]{0,1};
-		System.out.println("Result = "+runMachine());
+		System.out.println("Result = "+runMachine());*/
 	}
 
 	@Override
@@ -51,14 +54,14 @@ public class Day05 extends AdventOfCode{
 	}
 	
 	private int runMachine() {
-		for(int i = 0;i < machineCode.length; i++) {
-			if(machineCode[i] == 1) {
-				i = opcode1(i);
-			}else if(machineCode[i] == 2) {
-				i = opcode2(i);
-			}else if(machineCode[i] == 3) {
-				i = opcode3(machineCode, i);
-			}else if(machineCode[i] == 99){
+		for(int head = 0;head < machineCode.length;) {
+			if(machineCode[head] == 1) {
+				head = opcode1(head);
+			}else if(machineCode[head] == 2) {
+				head = opcode2(head);
+			}else if(machineCode[head] == 3) {
+				head = opcode3(machineCode, head);
+			}else if(machineCode[head] == 99){
 				break;
 			}
 		}
@@ -69,23 +72,24 @@ public class Day05 extends AdventOfCode{
 		int[] parameters = modeSwitch(head, 1);
 
 		machineCode[machineCode[head+3]] = parameters[0] + parameters[1];
-		return head+3;
+		return head+4;
 	}
 	private int opcode2(int head) {
 		int[] parameters = modeSwitch(head, 2);
 
 		machineCode[machineCode[head+3]] = parameters[0] * parameters[1];
-		return head+3;
+		return head+4;
 	}
 	private int opcode3(int[] array, int index) {
 		array[array[index+1]] = array[index+1];
 		return index;
 	}
+	
 	private int[] modeSwitch(int head, int opCode) {
 		switch (opCode) {
 		case 1:
 		case 2:
-			//fixa att varje parameter har egen parametermode
+			//fixa att varje parameter har egen parametermode utan 100 ifs
 			if(parameterModes[0] == 0) {
 				return new int[]{machineCode[machineCode[head+1]],
 								 machineCode[machineCode[head+2]],

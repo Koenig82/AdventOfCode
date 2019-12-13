@@ -1,4 +1,4 @@
-package y2019;
+package y2019.day02;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -45,7 +45,7 @@ public class Day02 extends AdventOfCode{
 	
 	private int[] getInput() throws UnsupportedEncodingException, IOException {
 		
-		String input = new String(Files.readAllBytes(Paths.get("src/y2019/day02Input.txt")), "UTF-8");
+		String input = new String(Files.readAllBytes(Paths.get("src/y2019/day02/day02Input.txt")), "UTF-8");
 		String[] substrings = input.split(",");
 
 		int[] intArray = new int[substrings.length];

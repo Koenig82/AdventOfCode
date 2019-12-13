@@ -1,4 +1,4 @@
-package y2019;
+package y2019.day04;
 
 import adventOfCode.AdventOfCode;
 
