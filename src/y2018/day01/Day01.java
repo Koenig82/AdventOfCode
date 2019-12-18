@@ -1,4 +1,4 @@
-package y2018;
+package y2018.day01;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,7 +20,7 @@ public class Day01 extends AdventOfCode {
 	public void part1() throws Exception {
 		
 		int sum = 0;
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day01Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day01/day01Input.txt"));
 		for(String line : readAllLines) {
 			sum += Integer.parseInt(line);
 		} 
@@ -35,7 +35,7 @@ public class Day01 extends AdventOfCode {
 	@Override
 	public void part2() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/Day01Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day01/Day01Input.txt"));
 		Set<Integer> results = new HashSet<>();
 		results.add(0);
 		int sum = 0;

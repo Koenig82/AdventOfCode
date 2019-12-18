@@ -1,4 +1,4 @@
-package y2018;
+package y2018.day04;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -50,7 +50,7 @@ public class Day04 extends AdventOfCode{
 	}
 	
 	private TreeSet<Event> getEvents() throws NumberFormatException, IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/day04Input.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/day04/day04Input.txt"));
 		
 		TreeSet<Event> eventlist = new TreeSet<>();
 		try {

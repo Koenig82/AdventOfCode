@@ -73,15 +73,15 @@ public class IntCodeCPU {
 	}
 	
 	private int opcode1(int head) {
-		int[] parameters = readParameter(head, 1);
+		//int[] parameters = readParameter(head, 1);
 
-		machineCode[machineCode[head+3]] = parameters[0] + parameters[1];
+		//machineCode[machineCode[head+3]] = parameters[0] + parameters[1];
 		return head+4;
 	}
 	private int opcode2(int head) {
-		int[] parameters = modeSwitch(head, 2);
+		//int[] parameters = modeSwitch(head, 2);
 
-		machineCode[machineCode[head+3]] = parameters[0] * parameters[1];
+		//machineCode[machineCode[head+3]] = parameters[0] * parameters[1];
 		return head+4;
 	}
 	private int opcode3(int[] array, int index) {

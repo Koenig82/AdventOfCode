@@ -1,4 +1,4 @@
-package y2018;
+package y2018.day02;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,7 +18,7 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day02Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day02/day02Input.txt"));
 		Map<Character,Integer> counts = new HashMap<>();
 
 		int twos = 0;
@@ -58,7 +58,7 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part2() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/Day02Input.txt"));
+		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day02/Day02Input.txt"));
 		
 		Pair<String,Integer> defaultValue = new Pair<>("",0);
 		Map<String, Pair<String,Integer>> greatestMatch = new HashMap<>();
