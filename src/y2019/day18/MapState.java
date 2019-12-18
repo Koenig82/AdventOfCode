@@ -3,19 +3,21 @@ package y2019.day18;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
 public class MapState {
 	char[][] map;
 	Position player;
-	Set<Position> targets;
+	Map<Position, Integer> targets;
 
 	public MapState() throws Exception {
 		
-		targets = new HashSet<>();
+		targets = new HashMap<>();
 //		List<String> reader = Files.readAllLines(Paths.get("src/y2019/day18/Day18Input.txt"));
 		List<String> reader = Files.readAllLines(Paths.get("src/y2019/day18/testinput.txt"));
 
