@@ -16,11 +16,6 @@ public class Position {
 		this.y = y;
 		distanceTable = new HashMap<>();
 	}
-	public Position(int x, int y, HashMap<Position,Integer> distances) {
-		this.x = x;
-		this.y = y;
-		distanceTable = distances;
-	}
 	
 	public Position move(Direction direction, int value) {
 		switch (direction) {
@@ -35,6 +30,10 @@ public class Position {
 	
 		}
 		throw new UnsupportedOperationException("agfag");
+	}
+	
+	public void addDistance() {
+		
 	}
 
 	@Override

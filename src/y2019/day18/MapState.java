@@ -54,11 +54,20 @@ public class MapState {
 
 		path.add(start);
 		visited.add(start);
-
+		int tempPathLength = 0;
+		int pathLength = 0;
+		boolean isIntersection = false;
+		boolean intersectionCheck = false;
 		while (!path.isEmpty()) {
+			isIntersection = false;
+			intersectionCheck = false;
 			Position pos = path.remove();
 			set(pos, '+');
 			for (Direction d : Direction.values()) {
+				if(intersectionCheck) {
+					//save pathlength
+					//perhaps as a graphnode
+				}
 				Position candidate = pos.move(d, 1);
 				if (!visited.contains(candidate)) {
 					visited.add(candidate);
@@ -75,12 +84,18 @@ public class MapState {
 						//borde lösa problem 1 men låter krävande
 						
 						//
-						
+						intersectionCheck = true;
 						path.add(candidate);
+						tempPathLength++;
 					}
 				}
+				
 			}
+			intersectionCheck = false;
+			pathLength += tempPathLength;
+			tempPathLength = 0;
 			displayState();
+			System.out.println(pathLength);
 		}
 	}
 	
