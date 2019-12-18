@@ -68,6 +68,12 @@ public class MapState {
 						//varje pos ska ha pathlenght?
 						
 						//när man stöter på en POI, skapa target med path längd
+						
+						//kanske varje pos kan ha length till allt man vet?(POIs till int dict)
+						//borde lösa problem 1 men låter krävande
+						
+						//
+						
 						path.add(candidate);
 					}
 				}
