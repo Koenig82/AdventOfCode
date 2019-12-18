@@ -41,7 +41,7 @@ public class MapState {
 	public void displayState() {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
-				System.out.print((char) map[i][j]);
+				System.out.print(map[i][j]);
 			}
 			System.out.print("\n");
 		}
@@ -63,6 +63,11 @@ public class MapState {
 					visited.add(candidate);
 					char c = check(candidate);
 					if (c != '#') {
+						//fixa så att path längd kapas om vägar slängs bort och
+						//den fortsätter på annat håll
+						//varje pos ska ha pathlenght?
+						
+						//när man stöter på en POI, skapa target med path längd
 						path.add(candidate);
 					}
 				}
