@@ -80,4 +80,6 @@ public class MapState {
 	private void set(Position pos, char c) {
 		map[pos.y][pos.x] = c;
 	}
+	
+	
 }
