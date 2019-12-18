@@ -45,6 +45,7 @@ public class MapState {
 			}
 			System.out.print("\n");
 		}
+		System.out.println("");
 	}
 
 	public void traverseMaze(Position start) {
@@ -63,6 +64,7 @@ public class MapState {
 					visited.add(candidate);
 					char c = check(candidate);
 					if (c != '#') {
+						
 						//fixa så att path längd kapas om vägar slängs bort och
 						//den fortsätter på annat håll
 						//varje pos ska ha pathlenght?

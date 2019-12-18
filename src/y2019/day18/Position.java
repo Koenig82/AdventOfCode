@@ -1,5 +1,7 @@
 package y2019.day18;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Position {
@@ -7,9 +9,17 @@ public class Position {
 	final public int x;
 	final public int y;
 	
+	Map<Position,Integer> distanceTable;
+	
 	public Position(int x, int y) {
 		this.x = x;
 		this.y = y;
+		distanceTable = new HashMap<>();
+	}
+	public Position(int x, int y, HashMap<Position,Integer> distances) {
+		this.x = x;
+		this.y = y;
+		distanceTable = distances;
 	}
 	
 	public Position move(Direction direction, int value) {
