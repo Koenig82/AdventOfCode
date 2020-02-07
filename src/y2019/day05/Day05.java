@@ -26,8 +26,8 @@ public class Day05 extends AdventOfCode{
 		IntCodeCPU cpu = new IntCodeCPU();
 		cpu.loadProgram();
 		//cpu.displayMemory();
-		cpu.writeToMemory(12, 1);
-		cpu.writeToMemory(2, 2);
+		//cpu.writeToMemory(12, 1);
+		//cpu.writeToMemory(2, 2);
 		result = cpu.executeProgram();
 		//cpu.displayMemory();
 		System.out.println(result);
