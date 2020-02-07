@@ -18,8 +18,8 @@ public class IntCodeCPU {
 
 	public void loadProgram() throws UnsupportedEncodingException, IOException {
 
-		//String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/testinput2")), "UTF-8");
-		String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day02/day02Input.txt")), "UTF-8");
+		String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/testinput2")), "UTF-8");
+		//String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day02/day02Input.txt")), "UTF-8");
 		//String input = new String(Files.readAllBytes(Paths.get("src/y2019/day05Input.txt")), "UTF-8");
 		String[] substrings = instructions.split(",");
 
@@ -30,7 +30,7 @@ public class IntCodeCPU {
 		this.memory = intArray;
 	}
 	
-	public void addInput(int input, Mode parameterMode) {
+	public void getInput(int input, Mode parameterMode) {
 		switch (parameterMode) {
 		case position:
 			this.input.add(memory[memory[input]]);
@@ -102,18 +102,21 @@ public class IntCodeCPU {
 	private int opcode1(int head) {
 		int indexA = memory[head+1];
 		int indexB = memory[head+2];
-		addInput(head+1, Mode.position);
-		addInput(head+2, Mode.position);
-		addInput(head+3, Mode.intermidiate);
+		getInput(head+1, Mode.position);
+		getInput(head+2, Mode.position);
 		int a = input.pop();
 		int b = input.pop();
-		int c = input.pop();
 		
-		//System.out.println(a+" "+b);
-		System.out.println("writing "+(a+b)+" to memory at index "+ c);
+		System.out.println("writing "+(a+b)+" to memory at index "+ memory[head+3]);
 		System.out.println(a+" "+b+" read from indexes "+indexA+" and "+indexB);
 		System.out.println();
-		writeToMemory(a+b, c);
+		writeToMemory(a+b, memory[head+3]);
+		
+		//int c = input.pop();
+		
+		//System.out.println(a+" "+b);
+		
+		//writeToMemory(a+b, c);
 		//memory[memory[head+3]] = memory[memory[head+1]] + memory[memory[head+2]];
 		//int[] parameters = readParameter(head, 1);
 
@@ -123,17 +126,18 @@ public class IntCodeCPU {
 	private int opcode2(int head) {
 		int indexA = memory[head+1];
 		int indexB = memory[head+2];
-		addInput(head+1, Mode.position);
-		addInput(head+2, Mode.position);
-		addInput(head+3, Mode.intermidiate);
+		getInput(head+1, Mode.position);
+		getInput(head+2, Mode.position);
 		int a = input.pop();
 		int b = input.pop();
-		int c = input.pop();
-		//System.out.println(a+" "+b);
-		System.out.println("writing "+(a*b)+" to memory at index "+ c);
+		
+		System.out.println("writing "+(a*b)+" to memory at index "+ memory[head+3]);
 		System.out.println(a+" "+b+" read from indexes "+indexA+" and "+indexB);
 		System.out.println();
-		writeToMemory(a*b, c);
+		writeToMemory(a*b, memory[head+3]);
+		
+		//System.out.println(a+" "+b);
+		
 		return head+4;
 	}
 	private int opcode3(int[] array, int index) {
