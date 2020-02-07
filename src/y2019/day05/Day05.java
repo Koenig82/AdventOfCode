@@ -12,7 +12,7 @@ public class Day05 extends AdventOfCode{
 	
 	private ArrayDeque<Integer> input = new ArrayDeque<>();
 	private int[] parameterModes = new int[2];
-	private int[] machineCode;
+	private int[] inputBand;
 
 	public static void main(String[] args) {
 		new Day05().run();
@@ -21,9 +21,16 @@ public class Day05 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
+		int result;
+		
 		IntCodeCPU cpu = new IntCodeCPU();
 		cpu.loadProgram();
-		cpu.addInput(1);
+		//cpu.displayMemory();
+		cpu.writeToMemory(12, 1);
+		cpu.writeToMemory(2, 2);
+		result = cpu.executeProgram();
+		//cpu.displayMemory();
+		System.out.println(result);
 		/*getInstructions();
 		addInput(1);
 		parameterModes = new int[]{0,1};
@@ -36,68 +43,57 @@ public class Day05 extends AdventOfCode{
 		//int[] array = getInput();	
 	}
 	
-	private void getInstructions() throws UnsupportedEncodingException, IOException {
-		
-		String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/testinput")), "UTF-8");
-		//String input = new String(Files.readAllBytes(Paths.get("src/y2019/day05Input.txt")), "UTF-8");
-		String[] substrings = instructions.split(",");
-
-		int[] intArray = new int[substrings.length];
-		for (int i = 0; i < substrings.length; i++) {
-			intArray[i] = Integer.parseInt(substrings[i]);
-		}
-		this.machineCode = intArray;
-	}
 	
-	private void addInput(int input) {
+	
+	/*private void addInput(int input) {
 		this.input.add(input);
-	}
+	}*/
 	
-	private int runMachine() {
-		for(int head = 0;head < machineCode.length;) {
-			if(machineCode[head] == 1) {
+	/*private int runMachine() {
+		for(int head = 0;head < inputBand.length;) {
+			if(inputBand[head] == 1) {
 				head = opcode1(head);
-			}else if(machineCode[head] == 2) {
+			}else if(inputBand[head] == 2) {
 				head = opcode2(head);
-			}else if(machineCode[head] == 3) {
-				head = opcode3(machineCode, head);
-			}else if(machineCode[head] == 99){
+			}else if(inputBand[head] == 3) {
+				head = opcode3(inputBand, head);
+			}else if(inputBand[head] == 99){
 				break;
 			}
 		}
-		return machineCode[0];
-	}
+		return inputBand[0];
+	}*/
 	
-	private int opcode1(int head) {
+	/*private int opcode1(int head) {
 		int[] parameters = modeSwitch(head, 1);
 
-		machineCode[machineCode[head+3]] = parameters[0] + parameters[1];
+		inputBand[inputBand[head+3]] = parameters[0] + parameters[1];
 		return head+4;
 	}
 	private int opcode2(int head) {
 		int[] parameters = modeSwitch(head, 2);
 
-		machineCode[machineCode[head+3]] = parameters[0] * parameters[1];
+		inputBand[inputBand[head+3]] = parameters[0] * parameters[1];
 		return head+4;
 	}
 	private int opcode3(int[] array, int index) {
 		array[array[index+1]] = array[index+1];
 		return index;
-	}
+	}*/
 	
-	private int[] modeSwitch(int head, int opCode) {
+	/*private int[] modeSwitch(int head, int opCode) {
 		switch (opCode) {
 		case 1:
 		case 2:
 			//fixa att varje parameter har egen parametermode utan 100 ifs
 			if(parameterModes[0] == 0) {
-				return new int[]{machineCode[machineCode[head+1]],
-								 machineCode[machineCode[head+2]],
-								 machineCode[machineCode[head+3]]};
+				return new int[]{inputBand[inputBand[head+1]],
+								 inputBand[inputBand[head+2]],
+								 inputBand[inputBand[head+3]]};
 			}else if(parameterModes[0] == 1) {
-				return new int[]{machineCode[head+1],
-						 		 machineCode[head+2],
-						 		 machineCode[head+3]};
+				return new int[]{inputBand[head+1],
+						 		 inputBand[head+2],
+						 		 inputBand[head+3]};
 			}
 			break;
 		case 3:
@@ -111,13 +107,6 @@ public class Day05 extends AdventOfCode{
 		}
 		return new int[] {1,1};
 		
-	}
+	}*/
 	
-	
-	private void preCalibrateNoun(int[] array, int x) {
-		array[1] = x;
-	}
-	private void preCalibrateVerb(int[] array, int x) {
-		array[2] = x;
-	}
 }
