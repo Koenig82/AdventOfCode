@@ -50,7 +50,8 @@ public class IntCodeCPU {
 	public int executeProgram() {
 		for(int head = 0;head < memory.length;) {
 			displayMemory();
-			//input.add(scanner.nextInt());
+			//opcodes ska läsa parametermodes från en attributarray av modes(param12&2)
+			//dessa ska sättas här när man parsar ut koden
 			if(memory[head] == 1) {
 				System.out.println("opcode 1 because value "+memory[head]+" was read index: "+head);
 				head = opcode1(head);
