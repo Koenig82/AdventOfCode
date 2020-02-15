@@ -31,9 +31,7 @@ public class IntCodeCPU {
 
 	public void loadProgram() throws UnsupportedEncodingException, IOException {
 
-		//String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/testinput2")), "UTF-8");
 		//String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/testinput")), "UTF-8");
-		//String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/testinput3")), "UTF-8");
 		String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/day05Input.txt")), "UTF-8");
 		String[] substrings = instructions.split(",");
 
@@ -64,6 +62,12 @@ public class IntCodeCPU {
 				break;
 			case 4:
 				head = opcode4(head, paramModeA);
+				break;
+			case 5:
+				head = opcode5(head, paramModeA, paramModeB);
+				break;
+			case 6:
+				head = opcode6(head, paramModeA, paramModeB);
 				break;
 			case 99:
 				return memory[0];
@@ -103,10 +107,7 @@ public class IntCodeCPU {
 
 		int a = getData(memory[head+1], paramModeA);
 		int b = getData(memory[head+2], paramModeB);
-		
-//		System.out.println("writing "+(a+b)+" to memory at index "+ memory[head+3]);
-//		System.out.println(a+" "+b+" read from indexes "+(head+1)+" and "+(head+2));
-//		System.out.println();
+
 		writeToMemory(a+b, memory[head+3]);
 
 		return head+4;
@@ -116,30 +117,41 @@ public class IntCodeCPU {
 
 		int a = getData(memory[head+1], paramModeA);
 		int b = getData(memory[head+2], paramModeB);
-		
-//		System.out.println("writing "+(a*b)+" to memory at index "+ memory[head+3]);
-//		System.out.println(a+" "+b+" read from indexes "+(head+1)+" and "+(head+2));
-//		System.out.println();
+
 		writeToMemory(a*b, memory[head+3]);
 		
 		return head+4;
 	}
 	
 	private int opcode3(int head) {
-		System.out.println("AWAITING INPUT >");
-		int input = scanner.nextInt();
-//		System.out.println("writing "+(input)+" to memory at index "+ memory[head+1]);
-//		System.out.println();
-		writeToMemory(input, memory[head+1]);
+		//System.out.println("AWAITING INPUT >");
+		//int input = scanner.nextInt();
+
+		writeToMemory(1, memory[head+1]);
 		
 		return head+2;
 	}
 	
-	private int opcode4(int head, Mode paramModeA) {
-		int value = getData(memory[head+1], paramModeA);
+	private int opcode4(int head, Mode paramMode) {
+		int value = getData(memory[head+1], paramMode);
 		System.out.println("OUTPUT: "+value);
-//		System.out.println();
-		
+
 		return head+2;
+	}
+	
+	private int opcode5(int head, Mode paramModeA, Mode paramModeB) {
+		
+		if(getData(memory[head+1], paramModeA) != 0) {
+			return getData(memory[head+2], paramModeB);
+		}	
+		return head+3;
+	}
+
+	private int opcode6(int head, Mode paramModeA, Mode paramModeB) {
+
+		if(getData(memory[head+1], paramModeA) == 0) {
+			return getData(memory[head+2], paramModeB);
+		}	
+		return head+3;
 	}
 }
