@@ -15,14 +15,14 @@ public class IntCodeCPU {
 	private static enum Mode{
 		position,
 		intermidiate,
-		unnkown1,
-		unnkown2,
-		unnkown3,
-		unnkown4,
-		unnkown5,
-		unnkown6,
-		unnkown7,
-		unnkown8;
+		notImplemented1,
+		notImplemented2,
+		notImplemented3,
+		notImplemented4,
+		notImplemented5,
+		notImplemented6,
+		notImplemented7,
+		notImplemented8;
 	}
 
 	public IntCodeCPU() {
