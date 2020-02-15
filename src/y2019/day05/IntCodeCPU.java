@@ -42,7 +42,10 @@ public class IntCodeCPU {
 		this.memory = intArray;
 	}
 	
-	public int executeProgram() {
+	public int executeProgram(Integer input) {
+		if(input != null) {
+			this.input.add(input);
+		}
 		int instruction;
 		Mode[] modes = Mode.values();
 		for(int head = 0;head < memory.length;) {
@@ -130,10 +133,14 @@ public class IntCodeCPU {
 	}
 	
 	private int opcode3(int head) {
-		//System.out.println("AWAITING INPUT >");
-		//int input = scanner.nextInt();
-
-		writeToMemory(5, memory[head+1]);
+		int input;
+		if(this.input.isEmpty()) {
+			System.out.println("AWAITING INPUT >");
+			input = scanner.nextInt();
+		}else {
+			input = this.input.removeFirst();
+		}
+		writeToMemory(input, memory[head+1]);
 		
 		return head+2;
 	}

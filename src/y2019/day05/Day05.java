@@ -22,12 +22,13 @@ public class Day05 extends AdventOfCode{
 	public void part1() throws Exception {
 		IntCodeCPU cpu = new IntCodeCPU();
 		cpu.loadProgram();
-		cpu.executeProgram();
+		cpu.executeProgram(1);
 	}
 
 	@Override
 	public void part2() throws Exception {
-		
-		//int[] array = getInput();	
+		IntCodeCPU cpu = new IntCodeCPU();
+		cpu.loadProgram();
+		cpu.executeProgram(5);
 	}
 }
