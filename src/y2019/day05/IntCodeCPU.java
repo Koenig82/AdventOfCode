@@ -69,6 +69,12 @@ public class IntCodeCPU {
 			case 6:
 				head = opcode6(head, paramModeA, paramModeB);
 				break;
+			case 7:
+				head = opcode7(head, paramModeA, paramModeB);
+				break;
+			case 8:
+				head = opcode8(head, paramModeA, paramModeB);
+				break;
 			case 99:
 				return memory[0];
 			default:
@@ -127,7 +133,7 @@ public class IntCodeCPU {
 		//System.out.println("AWAITING INPUT >");
 		//int input = scanner.nextInt();
 
-		writeToMemory(1, memory[head+1]);
+		writeToMemory(5, memory[head+1]);
 		
 		return head+2;
 	}
@@ -153,5 +159,25 @@ public class IntCodeCPU {
 			return getData(memory[head+2], paramModeB);
 		}	
 		return head+3;
+	}
+	
+	private int opcode7(int head, Mode paramModeA, Mode paramModeB) {
+
+		if(getData(memory[head+1], paramModeA) < getData(memory[head+2], paramModeB)) {
+			writeToMemory(1, memory[head+3]);
+		}else {
+			writeToMemory(0, memory[head+3]);
+		}
+		return head+4;
+	}
+	
+	private int opcode8(int head, Mode paramModeA, Mode paramModeB) {
+
+		if(getData(memory[head+1], paramModeA) == getData(memory[head+2], paramModeB)) {
+			writeToMemory(1, memory[head+3]);
+		}else {
+			writeToMemory(0, memory[head+3]);
+		}
+		return head+4;
 	}
 }
