@@ -3,7 +3,8 @@ package y2019.day06;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import adventOfCode.AdventOfCode;
 
@@ -15,7 +16,8 @@ public class Day06 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		List<String> input = getInput();
+		Set<String> input = getInput();
+		CelestialBody com = new CelestialBody("COM");
 		System.out.println(input);
 		
 	}
@@ -25,10 +27,17 @@ public class Day06 extends AdventOfCode{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	private List<String> getInput() throws IOException{
+	//fixa hashmap. streama ut första halvan av strängarna som key och den andra som value. kolla stream list to map
+	//gå igenom hela mappen och skapa nya celestial objects. räkna upp dom medans dom skapas
+	private HashMap<String> getInput() throws IOException{
 		//return Files.readAllLines(Paths.get("src/y2019/day06/Day06Input.txt"));
+		Set<String> input = new Set<>();
+		try (Stream<String> stream = Files.lines(Paths.get("src/y2019/day06/testInput"))) {
+		    stream.forEach(System.out::println);
+		}
+		Files.readAllLines(Paths.get("src/y2019/day06/testInput"));
 		return Files.readAllLines(Paths.get("src/y2019/day06/testInput"));
 	}
+	
 
 }
