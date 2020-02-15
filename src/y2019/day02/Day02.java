@@ -1,7 +1,7 @@
 package y2019.day02;
 
 import adventOfCode.AdventOfCode;
-import y2019.IntCodeCPU;
+import y2019.cpu.IntCodeCPU;
 
 public class Day02 extends AdventOfCode{
 
