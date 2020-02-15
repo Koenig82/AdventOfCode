@@ -20,21 +20,9 @@ public class Day05 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		
-		int result;
-		
 		IntCodeCPU cpu = new IntCodeCPU();
 		cpu.loadProgram();
-		//cpu.displayMemory();
-		//cpu.writeToMemory(12, 1);
-		//cpu.writeToMemory(2, 2);
-		result = cpu.executeProgram();
-		//cpu.displayMemory();
-		System.out.println(result);
-		/*getInstructions();
-		addInput(1);
-		parameterModes = new int[]{0,1};
-		System.out.println("Result = "+runMachine());*/
+		cpu.executeProgram();
 	}
 
 	@Override
