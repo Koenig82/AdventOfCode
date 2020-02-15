@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import adventOfCode.AdventOfCode;
-import y2018.day02.Day02;
 
 public class Day01 extends AdventOfCode{
 

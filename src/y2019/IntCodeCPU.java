@@ -1,4 +1,4 @@
-package y2019.day05;
+package y2019;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -29,10 +29,11 @@ public class IntCodeCPU {
 		scanner = new Scanner(System.in);
 	}
 
-	public void loadProgram() throws UnsupportedEncodingException, IOException {
-
+	public void loadProgram(String path) throws UnsupportedEncodingException, IOException {
+		
+		String instructions = new String(Files.readAllBytes(Paths.get(path)), "UTF-8");
 		//String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/testinput")), "UTF-8");
-		String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/day05Input.txt")), "UTF-8");
+		//String instructions = new String(Files.readAllBytes(Paths.get("src/y2019/day05/day05Input.txt")), "UTF-8");
 		String[] substrings = instructions.split(",");
 
 		int[] intArray = new int[substrings.length];
