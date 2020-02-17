@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Stream;
 
 import adventOfCode.AdventOfCode;
@@ -16,7 +17,7 @@ public class Day06 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		HashSet<String> input = getInput();
+		List<String> input = getInput();
 		CelestialBody com = new CelestialBody("COM");
 		String first = "COM";
 		String body = "COM";
@@ -47,13 +48,9 @@ public class Day06 extends AdventOfCode{
 		
 	}
 
-	private HashSet<String> getInput() throws IOException{
-
-		HashSet<String> input = new HashSet<>();
-		try (Stream<String> stream = Files.lines(Paths.get("src/y2019/day06/testInput"))) {
-		//try (Stream<String> stream = Files.lines(Paths.get("src/y2019/day06/Day06Input.txt"))) {
-		    stream.forEach(a -> input.add(a));
-		    return input;
-		}
+	private List<String> getInput() throws IOException{
+		
+		return Files.readAllLines(Paths.get("src/y2019/day06/testInput"));
+		//return Files.readAllLines(Paths.get("src/y2019/day06/Day06Input.txt"));
 	}
 }
