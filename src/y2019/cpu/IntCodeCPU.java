@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 public class IntCodeCPU {
 	
-	private ArrayDeque<Integer> input = new ArrayDeque<>();
+	private ArrayDeque<Integer> input;
+	private ArrayDeque<Integer> output;
+	
 	private Scanner scanner;
 	public int[] memory;
 	private static enum Mode{
@@ -27,6 +29,8 @@ public class IntCodeCPU {
 
 	public IntCodeCPU() {
 		scanner = new Scanner(System.in);
+		input = new ArrayDeque<>();
+		output = new ArrayDeque<>();
 	}
 
 	public void loadProgram(String path) throws UnsupportedEncodingException, IOException {
@@ -78,6 +82,9 @@ public class IntCodeCPU {
 				head = opcode8(head, paramModeA, paramModeB);
 				break;
 			case 99:
+				for (Integer output : output) {
+					System.out.println(output);
+				}
 				return memory[0];
 			default:
 				head++;
@@ -146,7 +153,7 @@ public class IntCodeCPU {
 	
 	private int opcode4(int head, Mode paramMode) {
 		int value = getData(memory[head+1], paramMode);
-		System.out.println("OUTPUT: "+value);
+		output.add(value);
 
 		return head+2;
 	}
