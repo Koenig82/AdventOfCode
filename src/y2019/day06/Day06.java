@@ -53,11 +53,11 @@ public class Day06 extends AdventOfCode{
 		List<String> youPath = getPathToCom("YOU", relations);
 		List<String> sanPath = getPathToCom("SAN", relations);
 	
-		System.out.println(getCommonParent(youPath, sanPath));
+		System.out.println("Result = " + getPathLengthToCommonParent(youPath, sanPath));
 		
 	}
 
-	private int getCommonParent(List<String> youPath, List<String> sanPath) {
+	private int getPathLengthToCommonParent(List<String> youPath, List<String> sanPath) {
 		Set<String> set = new HashSet<>(youPath);
 		int jump = 0;
 		for (String string : sanPath) {
@@ -92,8 +92,7 @@ public class Day06 extends AdventOfCode{
 	}
 
 	private List<String> getInput() throws IOException{
-		
-		//return Files.readAllLines(Paths.get("src/y2019/day06/testInput"));
+
 		return Files.readAllLines(Paths.get("src/y2019/day06/Day06Input.txt"));
 	}
 	

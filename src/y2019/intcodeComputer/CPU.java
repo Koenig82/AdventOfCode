@@ -1,4 +1,4 @@
-package y2019.cpu;
+package y2019.intcodeComputer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.Scanner;
 
-public class IntCodeCPU {
+public class CPU {
 	
 	private ArrayDeque<Integer> input;
 	private ArrayDeque<Integer> output;
@@ -27,7 +27,7 @@ public class IntCodeCPU {
 		notImplemented8;
 	}
 
-	public IntCodeCPU() {
+	public CPU() {
 		scanner = new Scanner(System.in);
 		input = new ArrayDeque<>();
 		output = new ArrayDeque<>();

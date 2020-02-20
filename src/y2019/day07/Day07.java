@@ -1,7 +1,7 @@
 package y2019.day07;
 
 import adventOfCode.AdventOfCode;
-import y2019.cpu.IntCodeCPU;
+import y2019.intcodeComputer.CPU;
 
 public class Day07 extends AdventOfCode{
 
@@ -12,25 +12,25 @@ public class Day07 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		IntCodeCPU cpuA = new IntCodeCPU();
+		CPU cpuA = new CPU();
 		cpuA.loadProgram("src/y2019/day07/day07Input.txt");
 		cpuA.loadProgram("src/y2019/day07/testInput");
 		cpuA.executeProgram(4);
 
-		IntCodeCPU cpuB = new IntCodeCPU();
+		CPU cpuB = new CPU();
 		cpuB.loadProgram("src/y2019/day07/day07Input.txt");
 		cpuA.loadProgram("src/y2019/day07/day07Input.txt");
 		cpuB.executeProgram(3);
 		
-		IntCodeCPU cpuC = new IntCodeCPU();
+		CPU cpuC = new CPU();
 		cpuC.loadProgram("src/y2019/day07/day07Input.txt");
 		cpuC.executeProgram(2);
 		
-		IntCodeCPU cpuD = new IntCodeCPU();
+		CPU cpuD = new CPU();
 		cpuD.loadProgram("src/y2019/day07/day07Input.txt");
 		cpuD.executeProgram(1);
 		
-		IntCodeCPU cpuE = new IntCodeCPU();
+		CPU cpuE = new CPU();
 		cpuE.loadProgram("src/y2019/day07/day07Input.txt");
 		cpuE.executeProgram(0);
 	}
