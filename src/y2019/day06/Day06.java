@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import adventOfCode.AdventOfCode;
 
@@ -76,12 +75,11 @@ public class Day06 extends AdventOfCode{
 		return -1;
 	}
 
-	private List<String> getPathToCom(String planet,
-			HashMap<String, String> relations) {
-		
+	private List<String> getPathToCom(String planet, 
+									  HashMap<String, String> relations) {
 		
 		List<String> result = new ArrayList<>();
-		//result.add(planet);
+
 		while(!relations.get(planet).equals("COM")) {
 			planet = relations.get(planet);
 			result.add(planet);
