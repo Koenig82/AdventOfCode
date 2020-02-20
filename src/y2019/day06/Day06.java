@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import adventOfCode.AdventOfCode;
@@ -21,39 +22,79 @@ public class Day06 extends AdventOfCode{
 	public void part1() throws Exception {
 		
 		List<String> input = getInput();
-		HashSet<String> planets = getAll(input);
-		System.out.println(planets);
-		HashMap<String,List<String>> relations = new HashMap<>();
+	
+		HashMap<String,String> relations = new HashMap<>();
 		int relationCounter = 0;
-		System.out.println();
-		for (String planet : planets) {
-			for (String relation : input) {
-				if(relation.startsWith(planet)) {
-					String[] substrings = relation.split("\\)");
-					if(relations.containsKey(planet)) {
-						relations.get(planet).add(substrings[1]);
-						relationCounter++;
-					}else {
-						List<String> orbitlist = new ArrayList<>();
-						relations.put(planet, orbitlist);
-					}
-				}
-			}	
+		
+		for (String string : input) {
+			String[] substrings = string.split("\\)");
+			relations.put(substrings[1], substrings[0]);
 		}
-		//System.out.println(relations);
+		
+		for(String planet : relations.keySet()) {
+			while(!relations.get(planet).equals("COM")) {
+				planet = relations.get(planet);
+				relationCounter++;
+			}
+			relationCounter++;
+		}
 		System.out.println("Result = " + relationCounter);
 	}
 
 	@Override
 	public void part2() throws Exception {
-		// TODO Auto-generated method stub
+		List<String> input = getInput();		
+		HashMap<String,String> relations = new HashMap<>();
+		
+		for (String string : input) {
+			String[] substrings = string.split("\\)");
+			relations.put(substrings[1], substrings[0]);
+		}
+		List<String> youPath = getPathToCom("YOU", relations);
+		List<String> sanPath = getPathToCom("SAN", relations);
+	
+		System.out.println(getCommonParent(youPath, sanPath));
+		
+	}
+
+	private int getCommonParent(List<String> youPath, List<String> sanPath) {
+		Set<String> set = new HashSet<>(youPath);
+		int jump = 0;
+		for (String string : sanPath) {
+			if(set.contains(string)) {
+				for (String string2 : youPath) {
+					if(string2.equals(string)) {
+						return jump;
+					}else {
+						jump++;
+					}
+				}
+			}else {
+				jump++;
+			}
+		}
+		return -1;
+	}
+
+	private List<String> getPathToCom(String planet,
+			HashMap<String, String> relations) {
+		
+		
+		List<String> result = new ArrayList<>();
+		//result.add(planet);
+		while(!relations.get(planet).equals("COM")) {
+			planet = relations.get(planet);
+			result.add(planet);
+		}
+
+		return result;
 		
 	}
 
 	private List<String> getInput() throws IOException{
 		
-		return Files.readAllLines(Paths.get("src/y2019/day06/testInput"));
-		//return Files.readAllLines(Paths.get("src/y2019/day06/Day06Input.txt"));
+		//return Files.readAllLines(Paths.get("src/y2019/day06/testInput"));
+		return Files.readAllLines(Paths.get("src/y2019/day06/Day06Input.txt"));
 	}
 	
 	private HashSet<String> getAll(List<String> input){
