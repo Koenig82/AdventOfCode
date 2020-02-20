@@ -13,13 +13,13 @@ public class Day05 extends AdventOfCode{
 	public void part1() throws Exception {
 		CPU cpu = new CPU();
 		cpu.loadProgram("src/y2019/day05/day05Input.txt");
-		cpu.executeProgram(1);
+		cpu.executeProgram(1, false);
 	}
 
 	@Override
 	public void part2() throws Exception {
 		CPU cpu = new CPU();
 		cpu.loadProgram("src/y2019/day05/day05Input.txt");
-		cpu.executeProgram(5);
+		cpu.executeProgram(5, false);
 	}
 }

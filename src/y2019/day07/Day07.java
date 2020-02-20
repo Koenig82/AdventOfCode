@@ -11,28 +11,33 @@ public class Day07 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		
-		CPU cpuA = new CPU();
-		cpuA.loadProgram("src/y2019/day07/day07Input.txt");
-		cpuA.loadProgram("src/y2019/day07/testInput");
-		cpuA.executeProgram(4);
+		//String program = "src/y2019/day07/day07Input.txt";
+		String program = "src/y2019/day07/testInput";
 
+		CPU cpuA = new CPU();
+		cpuA.loadProgram(program);
+		int pipe = cpuA.executeProgram(4, true);
+		System.out.println(pipe);
+		
 		CPU cpuB = new CPU();
-		cpuB.loadProgram("src/y2019/day07/day07Input.txt");
-		cpuA.loadProgram("src/y2019/day07/day07Input.txt");
-		cpuB.executeProgram(3);
+		cpuA.loadProgram(program);
+		pipe = cpuB.executeProgram(3, true);
+		System.out.println(pipe);
 		
 		CPU cpuC = new CPU();
-		cpuC.loadProgram("src/y2019/day07/day07Input.txt");
-		cpuC.executeProgram(2);
+		cpuA.loadProgram(program);
+		pipe = cpuC.executeProgram(2, true);
+		System.out.println(pipe);
 		
 		CPU cpuD = new CPU();
-		cpuD.loadProgram("src/y2019/day07/day07Input.txt");
-		cpuD.executeProgram(1);
+		cpuA.loadProgram(program);
+		pipe = cpuD.executeProgram(1, true);
+		System.out.println(pipe);
 		
 		CPU cpuE = new CPU();
-		cpuE.loadProgram("src/y2019/day07/day07Input.txt");
-		cpuE.executeProgram(0);
+		cpuA.loadProgram(program);
+		pipe = cpuE.executeProgram(0, true);
+		System.out.println(pipe);
 	}
 
 	@Override

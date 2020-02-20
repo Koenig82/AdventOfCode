@@ -16,7 +16,7 @@ public class Day02 extends AdventOfCode{
 		cpu.loadProgram("src/y2019/day02/day02Input.txt");
 		cpu.writeToMemory(12, 1);
 		cpu.writeToMemory(2, 2);
-		System.out.println("Result = "+cpu.executeProgram(null));
+		System.out.println("Result = "+cpu.executeProgram(null, false));
 
 	}
 
@@ -30,7 +30,7 @@ public class Day02 extends AdventOfCode{
 			for(int verbCount = 0;verbCount<100;verbCount++) {
 				cpu.writeToMemory(nounCount, 1);
 				cpu.writeToMemory(verbCount, 2);
-				if(cpu.executeProgram(null) == 19690720) {
+				if(cpu.executeProgram(null, false) == 19690720) {
 					System.out.println("Result = "+((100*nounCount)+verbCount));
 					break;
 				}
