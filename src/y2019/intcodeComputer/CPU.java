@@ -37,9 +37,9 @@ public class CPU {
 		Mode[] modes = Mode.values();
 		for(int head = 0;head < memory.data.length;) {
 			
-			if(!output.isEmpty()) {
+			/*if(!output.isEmpty()) {
 				handleOutput(pipeOutput);
-			}
+			}*/
 			
 			instruction = memory.data[head];
 			int opCode = instruction % 100;
@@ -118,7 +118,8 @@ public class CPU {
 	
 	private int opcode4(int head, Mode paramMode) {
 		int value = memory.getData(memory.data[head+1], paramMode);
-		output.add(value);
+		System.out.println("Out: "+value);
+		//output.add(value);
 
 		return head+2;
 	}
@@ -159,13 +160,14 @@ public class CPU {
 		return head+4;
 	}
 	
-	private void handleOutput(boolean pipeOutput) {
+	/*private void handleOutput(boolean pipeOutput) {
 		if(pipeOutput) {
-			memory.writeToMemory(output.pop(), 0);
+			//memory.writeToMemory(output.pop(), 0);
+			System.out.println(output.remove());
 		}else {
-			System.out.println(output.pop());
+			System.out.println(output.remove());
 		}
-	}
+	}*/
 	
 	public void displayMemory() {
 		for (Integer integer : memory.data) {
