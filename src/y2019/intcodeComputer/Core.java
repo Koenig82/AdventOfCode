@@ -18,17 +18,17 @@ public class Core {
 	
 	public int executeProgram(Integer input, boolean pipeOutput) {
 		if(input != null) {
-			this.input.add(input);
+			io.getInput().add(input);
 		}
 		int instruction;
 		Mode[] modes = Mode.values();
-		for(int head = 0;head < memory.data.length;) {
+		for(int head = 0;head < cache.data.length;) {
 			
 			if(!output.isEmpty()) {
 				handleOutput(pipeOutput);
 			}
 			//displayMemory();
-			instruction = memory.data[head];
+			instruction = cache.data[head];
 			int opCode = instruction % 100;
 			Mode paramModeA = modes[instruction / 100 % Mode.values().length];
 			Mode paramModeB = modes[instruction / 1000 % Mode.values().length];
@@ -61,7 +61,7 @@ public class Core {
 				/*for (Integer output : output) {
 					System.out.println(output);
 				}*/
-				return memory.data[0];
+				return cache.data[0];
 			default:
 				head++;
 				break;
@@ -93,11 +93,11 @@ public class Core {
 	
 	private int opcode3(int head) {
 		int input;
-		if(this.input.isEmpty()) {
+		if(io.getInput().isEmpty()) {
 			System.out.println("AWAITING INPUT >");
-			input = scanner.nextInt();
+			input = io.getScanner().nextInt();
 		}else {
-			input = this.input.removeFirst();
+			input = io.getInput().removeFirst();
 		}
 		cache.writeToMemory(input, cache.data[head+1]);
 		
@@ -106,7 +106,7 @@ public class Core {
 	
 	private int opcode4(int head, Mode paramMode) {
 		int value = cache.getData(cache.data[head+1], paramMode);
-		output.add(value);
+		io.getOutput().add(value);
 
 		return head+2;
 	}
