@@ -20,22 +20,22 @@ public class Day07 extends AdventOfCode{
 		System.out.println(pipe);
 		
 		CPU cpuB = new CPU();
-		cpuA.loadProgram(program);
+		cpuB.loadProgram(program);
 		pipe = cpuB.executeProgram(3, true);
 		System.out.println(pipe);
 		
 		CPU cpuC = new CPU();
-		cpuA.loadProgram(program);
+		cpuC.loadProgram(program);
 		pipe = cpuC.executeProgram(2, true);
 		System.out.println(pipe);
 		
 		CPU cpuD = new CPU();
-		cpuA.loadProgram(program);
+		cpuD.loadProgram(program);
 		pipe = cpuD.executeProgram(1, true);
 		System.out.println(pipe);
 		
 		CPU cpuE = new CPU();
-		cpuA.loadProgram(program);
+		cpuE.loadProgram(program);
 		pipe = cpuE.executeProgram(0, true);
 		System.out.println(pipe);
 	}
