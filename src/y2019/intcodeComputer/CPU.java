@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CPU {
@@ -14,8 +15,14 @@ public class CPU {
 	
 	private Scanner scanner;
 	private Memory memory;
+	
+	private Core[] cores;
 
-	public CPU() {
+	public CPU(int nrOfcores) {
+		cores = new Core[nrOfcores];
+		for(int i = 0;i<nrOfcores;i++) {
+			cores[i] = new Core(i, );
+		}
 		scanner = new Scanner(System.in);
 		input = new ArrayDeque<>();
 		output = new ArrayDeque<>();
