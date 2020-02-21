@@ -1,36 +1,21 @@
 package y2019.intcodeComputer;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayDeque;
 import java.util.Scanner;
 
-public class CPU {
+public class Core {
 	
-	private ArrayDeque<Integer> input;
-	private ArrayDeque<Integer> output;
+	private int id;
+	private IO io;
 	
-	private Scanner scanner;
-	private Memory memory;
-
-	public CPU() {
-		scanner = new Scanner(System.in);
-		input = new ArrayDeque<>();
-		output = new ArrayDeque<>();
-		memory = new Memory();
-	}
-
-	public void loadProgram(String path) throws UnsupportedEncodingException, IOException {
-		memory.loadProgram(path);
-	}
-	public void writeToMemory(int symbol, int index) {
-		memory.writeToMemory(symbol, index);
+	private Memory cache;
+	
+	
+	public void Core(int id, IO io) {
+		this.id = id;
+		
+		cache = new Memory();
 	}
 	
-//	Thread t = new Thread(() -> core.execute(args));
-//    t.start();
 	public int executeProgram(Integer input, boolean pipeOutput) {
 		if(input != null) {
 			this.input.add(input);
@@ -83,24 +68,25 @@ public class CPU {
 			}
 		}
 		return -1;
+		
 	}
 	
 	private int opcode1(int head, Mode paramModeA, Mode paramModeB) {
 
-		int a = memory.getData(memory.data[head+1], paramModeA);
-		int b = memory.getData(memory.data[head+2], paramModeB);
+		int a = cache.getData(cache.data[head+1], paramModeA);
+		int b = cache.getData(cache.data[head+2], paramModeB);
 
-		memory.writeToMemory(a+b, memory.data[head+3]);
+		cache.writeToMemory(a+b, cache.data[head+3]);
 
 		return head+4;
 	}
 	
 	private int opcode2(int head, Mode paramModeA, Mode paramModeB) {
 
-		int a = memory.getData(memory.data[head+1], paramModeA);
-		int b = memory.getData(memory.data[head+2], paramModeB);
+		int a = cache.getData(cache.data[head+1], paramModeA);
+		int b = cache.getData(cache.data[head+2], paramModeB);
 
-		memory.writeToMemory(a*b, memory.data[head+3]);
+		cache.writeToMemory(a*b, cache.data[head+3]);
 		
 		return head+4;
 	}
@@ -113,13 +99,13 @@ public class CPU {
 		}else {
 			input = this.input.removeFirst();
 		}
-		memory.writeToMemory(input, memory.data[head+1]);
+		cache.writeToMemory(input, cache.data[head+1]);
 		
 		return head+2;
 	}
 	
 	private int opcode4(int head, Mode paramMode) {
-		int value = memory.getData(memory.data[head+1], paramMode);
+		int value = cache.getData(cache.data[head+1], paramMode);
 		output.add(value);
 
 		return head+2;
@@ -127,52 +113,38 @@ public class CPU {
 	
 	private int opcode5(int head, Mode paramModeA, Mode paramModeB) {
 		
-		if(memory.getData(memory.data[head+1], paramModeA) != 0) {
-			return memory.getData(memory.data[head+2], paramModeB);
+		if(cache.getData(cache.data[head+1], paramModeA) != 0) {
+			return cache.getData(cache.data[head+2], paramModeB);
 		}	
 		return head+3;
 	}
 
 	private int opcode6(int head, Mode paramModeA, Mode paramModeB) {
 
-		if(memory.getData(memory.data[head+1], paramModeA) == 0) {
-			return memory.getData(memory.data[head+2], paramModeB);
+		if(cache.getData(cache.data[head+1], paramModeA) == 0) {
+			return cache.getData(cache.data[head+2], paramModeB);
 		}	
 		return head+3;
 	}
 	
 	private int opcode7(int head, Mode paramModeA, Mode paramModeB) {
 
-		if(memory.getData(memory.data[head+1], paramModeA) < memory.getData(memory.data[head+2], paramModeB)) {
-			memory.writeToMemory(1, memory.data[head+3]);
+		if(cache.getData(cache.data[head+1], paramModeA) < cache.getData(cache.data[head+2], paramModeB)) {
+			cache.writeToMemory(1, cache.data[head+3]);
 		}else {
-			memory.writeToMemory(0, memory.data[head+3]);
+			cache.writeToMemory(0, cache.data[head+3]);
 		}
 		return head+4;
 	}
 	
 	private int opcode8(int head, Mode paramModeA, Mode paramModeB) {
 
-		if(memory.getData(memory.data[head+1], paramModeA) == memory.getData(memory.data[head+2], paramModeB)) {
-			memory.writeToMemory(1, memory.data[head+3]);
+		if(cache.getData(cache.data[head+1], paramModeA) == cache.getData(cache.data[head+2], paramModeB)) {
+			cache.writeToMemory(1, cache.data[head+3]);
 		}else {
-			memory.writeToMemory(0, memory.data[head+3]);
+			cache.writeToMemory(0, cache.data[head+3]);
 		}
 		return head+4;
 	}
-	
-	private void handleOutput(boolean pipeOutput) {
-		if(pipeOutput) {
-			memory.writeToMemory(output.pop(), 0);
-		}else {
-			System.out.println(output.remove());
-		}
-	}
-	
-	public void displayMemory() {
-		for (Integer integer : memory.data) {
-			System.out.print(", "+integer);
-		}
-		System.out.println();
-	}
+
 }
