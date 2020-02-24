@@ -39,10 +39,16 @@ public class CPU {
 	
 	public void executePrograms() {
 		for (Core core : cores) {
-			Thread t = new Thread(() -> core.execute(args));
+			Thread t = new Thread(() -> core.executeProgram(null, false));
 			t.start();
 		}
 		
+	}
+	
+	public void executeProgramAtCoreWithInput(int coreId, int input) {
+		
+		Thread t = new Thread(() -> cores[coreId].executeProgram(input, false));
+		t.start();
 	}
 
 	/*public int executeProgram(Integer input, boolean pipeOutput) {

@@ -16,7 +16,7 @@ public class Day02 extends AdventOfCode{
 		cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt", 0);
 		cpu.writeToCacheAtCoreId(12, 1, 0);
 		cpu.writeToCacheAtCoreId(2, 2, 0);
-		System.out.println("Result = "+cpu.executeProgram(null, false));
+		System.out.println("Result = "+cpu.executeProgramAtCoreWithInput(null, false));
 
 	}
 
