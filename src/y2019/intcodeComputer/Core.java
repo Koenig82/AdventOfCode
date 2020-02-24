@@ -1,5 +1,7 @@
 package y2019.intcodeComputer;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 public class Core {
@@ -10,10 +12,17 @@ public class Core {
 	private Memory cache;
 	
 	
-	public void Core(int id, IO io) {
+	public Core(int id) {
 		this.id = id;
-		
+		io = new IO();
 		cache = new Memory();
+	}
+	
+	public void writeToMemory(int symbol, int index) {
+		cache.writeToMemory(symbol, index);
+	}
+	public void loadProgram(String path) throws UnsupportedEncodingException, IOException {
+		cache.loadProgram(path);
 	}
 	
 	public int executeProgram(Integer input, boolean pipeOutput) {
@@ -24,9 +33,9 @@ public class Core {
 		Mode[] modes = Mode.values();
 		for(int head = 0;head < cache.data.length;) {
 			
-			if(!output.isEmpty()) {
+			/*if(!io.output.isEmpty()) {
 				handleOutput(pipeOutput);
-			}
+			}*/
 			//displayMemory();
 			instruction = cache.data[head];
 			int opCode = instruction % 100;

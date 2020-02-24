@@ -13,32 +13,39 @@ public class CPU {
 	private ArrayDeque<Integer> input;
 	private ArrayDeque<Integer> output;
 	
-	private Scanner scanner;
-	private Memory memory;
+	//private Scanner scanner;
+	//private Memory memory;
 	
 	private Core[] cores;
 
 	public CPU(int nrOfcores) {
 		cores = new Core[nrOfcores];
 		for(int i = 0;i<nrOfcores;i++) {
-			cores[i] = new Core(i, );
+			cores[i] = new Core(i);
 		}
-		scanner = new Scanner(System.in);
+		//scanner = new Scanner(System.in);
 		input = new ArrayDeque<>();
 		output = new ArrayDeque<>();
-		memory = new Memory();
+		//memory = new Memory();
+	}
+	public void loadProgramAtCoreId(String path, int coreId) throws UnsupportedEncodingException, IOException {
+		cores[coreId].loadProgram(path);
+		
 	}
 
-	public void loadProgram(String path) throws UnsupportedEncodingException, IOException {
-		memory.loadProgram(path);
-	}
-	public void writeToMemory(int symbol, int index) {
-		memory.writeToMemory(symbol, index);
+	public void writeToCacheAtCoreId(int symbol, int index, int coreId) {
+		cores[coreId].writeToMemory(symbol, index);
 	}
 	
-//	Thread t = new Thread(() -> core.execute(args));
-//    t.start();
-	public int executeProgram(Integer input, boolean pipeOutput) {
+	public void executePrograms() {
+		for (Core core : cores) {
+			Thread t = new Thread(() -> core.execute(args));
+			t.start();
+		}
+		
+	}
+
+	/*public int executeProgram(Integer input, boolean pipeOutput) {
 		if(input != null) {
 			this.input.add(input);
 		}
@@ -80,9 +87,7 @@ public class CPU {
 				head = opcode8(head, paramModeA, paramModeB);
 				break;
 			case 99:
-				/*for (Integer output : output) {
-					System.out.println(output);
-				}*/
+				
 				return memory.data[0];
 			default:
 				head++;
@@ -90,9 +95,9 @@ public class CPU {
 			}
 		}
 		return -1;
-	}
+	}*/
 	
-	private int opcode1(int head, Mode paramModeA, Mode paramModeB) {
+	/*private int opcode1(int head, Mode paramModeA, Mode paramModeB) {
 
 		int a = memory.getData(memory.data[head+1], paramModeA);
 		int b = memory.getData(memory.data[head+2], paramModeB);
@@ -166,7 +171,7 @@ public class CPU {
 			memory.writeToMemory(0, memory.data[head+3]);
 		}
 		return head+4;
-	}
+	}*/
 	
 	private void handleOutput(boolean pipeOutput) {
 		if(pipeOutput) {

@@ -15,8 +15,8 @@ public class IO {
 		this.scanner = scanner;
 	}
 
-	private ArrayDeque<Integer> input;
-	private ArrayDeque<Integer> output;
+	ArrayDeque<Integer> input;
+	ArrayDeque<Integer> output;
 	
 	public IO() {
 		scanner = new Scanner(System.in);

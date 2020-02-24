@@ -12,10 +12,10 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		CPU cpu = new CPU();
-		cpu.loadProgram("src/y2019/day02/day02Input.txt");
-		cpu.writeToMemory(12, 1);
-		cpu.writeToMemory(2, 2);
+		CPU cpu = new CPU(1);
+		cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt", 0);
+		cpu.writeToCacheAtCoreId(12, 1, 0);
+		cpu.writeToCacheAtCoreId(2, 2, 0);
 		System.out.println("Result = "+cpu.executeProgram(null, false));
 
 	}
