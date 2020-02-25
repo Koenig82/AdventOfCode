@@ -1,7 +1,7 @@
 package y2019.day02;
 
 import adventOfCode.AdventOfCode;
-import y2019.intcodeComputer.CPU;
+import y2019.intcodeComputer.CPUControl;
 
 public class Day02 extends AdventOfCode{
 
@@ -12,18 +12,18 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		CPU cpu = new CPU(1);
+		CPUControl cpu = new CPUControl(1);
 		cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt", 0);
 		cpu.writeToCacheAtCoreId(12, 1, 0);
 		cpu.writeToCacheAtCoreId(2, 2, 0);
-		System.out.println("Result = "+cpu.executeProgramAtCoreWithInput(null, false));
+		System.out.println("Result = "+cpu.executePrograms(null, false));
 
 	}
 
 	@Override
 	public void part2() throws Exception {
 		
-		CPU cpu = new CPU();
+		CPUControl cpu = new CPUControl();
 		cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt",0);
 		
 		for(int nounCount = 0;nounCount < 100;nounCount++) {

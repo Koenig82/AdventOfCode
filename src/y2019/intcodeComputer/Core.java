@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Core {
 	
 	private int id;
-	private IO io;
+	IO io;
 	
 	private Memory cache;
 	
@@ -25,10 +25,10 @@ public class Core {
 		cache.loadProgram(path);
 	}
 	
-	public int executeProgram(Integer input, boolean pipeOutput) {
-		if(input != null) {
+	public int executeProgram(/*Integer input,*/ boolean pipeOutput) {
+		/*if(input != null) {
 			io.getInput().add(input);
-		}
+		}*/
 		int instruction;
 		Mode[] modes = Mode.values();
 		for(int head = 0;head < cache.data.length;) {

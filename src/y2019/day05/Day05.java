@@ -1,7 +1,7 @@
 package y2019.day05;
 
 import adventOfCode.AdventOfCode;
-import y2019.intcodeComputer.CPU;
+import y2019.intcodeComputer.CPUControl;
 
 public class Day05 extends AdventOfCode{
 
@@ -11,14 +11,14 @@ public class Day05 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		CPU cpu = new CPU();
+		CPUControl cpu = new CPUControl();
 		cpu.loadProgram("src/y2019/day05/day05Input.txt");
 		cpu.executeProgram(1, false);
 	}
 
 	@Override
 	public void part2() throws Exception {
-		CPU cpu = new CPU();
+		CPUControl cpu = new CPUControl();
 		cpu.loadProgram("src/y2019/day05/day05Input.txt");
 		cpu.executeProgram(5, false);
 	}

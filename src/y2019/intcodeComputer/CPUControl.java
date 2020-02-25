@@ -8,7 +8,7 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class CPU {
+public class CPUControl {
 	
 	//private ArrayDeque<Integer> input;
 	//private ArrayDeque<Integer> output;
@@ -18,7 +18,7 @@ public class CPU {
 	
 	private Core[] cores;
 
-	public CPU(int nrOfcores) {
+	public CPUControl(int nrOfcores) {
 		cores = new Core[nrOfcores];
 		for(int i = 0;i<nrOfcores;i++) {
 			cores[i] = new Core(i);
@@ -37,22 +37,18 @@ public class CPU {
 		cores[coreId].writeToMemory(symbol, index);
 	}
 	
+	//fixa nån slags dispatch som kan vänta in alla joins. låt tidigare
+	//varianter plocka från minne[0] från sin core via nån metod
+	//getValueAtIndex?
 	public void executePrograms() {
 		for (Core core : cores) {
 			Thread t = new Thread(() -> core.executeProgram(null, false));
 			t.start();
-		}
-		
-	}
-	
-	public void executeProgramAtCoreWithInput(int coreId, int input) {
-		
-		Thread t = new Thread(() -> cores[coreId].executeProgram(input, false));
-		t.start();
+		}	
 	}
 	
 	public void addInputToCore(int input, int coreId) {
-		cores[coreId].
+		cores[coreId].io.input.add(input);
 	}
 
 	/*public int executeProgram(Integer input, boolean pipeOutput) {
