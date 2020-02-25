@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class CPU {
 	
-	private ArrayDeque<Integer> input;
-	private ArrayDeque<Integer> output;
+	//private ArrayDeque<Integer> input;
+	//private ArrayDeque<Integer> output;
 	
 	//private Scanner scanner;
 	//private Memory memory;
@@ -24,8 +24,8 @@ public class CPU {
 			cores[i] = new Core(i);
 		}
 		//scanner = new Scanner(System.in);
-		input = new ArrayDeque<>();
-		output = new ArrayDeque<>();
+		//input = new ArrayDeque<>();
+		//output = new ArrayDeque<>();
 		//memory = new Memory();
 	}
 	public void loadProgramAtCoreId(String path, int coreId) throws UnsupportedEncodingException, IOException {
@@ -49,6 +49,10 @@ public class CPU {
 		
 		Thread t = new Thread(() -> cores[coreId].executeProgram(input, false));
 		t.start();
+	}
+	
+	public void addInputToCore(int input, int coreId) {
+		cores[coreId].
 	}
 
 	/*public int executeProgram(Integer input, boolean pipeOutput) {
@@ -179,18 +183,18 @@ public class CPU {
 		return head+4;
 	}*/
 	
-	private void handleOutput(boolean pipeOutput) {
+	/*private void handleOutput(boolean pipeOutput) {
 		if(pipeOutput) {
 			memory.writeToMemory(output.pop(), 0);
 		}else {
 			System.out.println(output.remove());
 		}
-	}
+	}*/
 	
-	public void displayMemory() {
+	/*public void displayMemory() {
 		for (Integer integer : memory.data) {
 			System.out.print(", "+integer);
 		}
 		System.out.println();
-	}
+	}*/
 }

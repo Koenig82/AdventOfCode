@@ -24,12 +24,12 @@ public class Day02 extends AdventOfCode{
 	public void part2() throws Exception {
 		
 		CPU cpu = new CPU();
-		cpu.loadProgram("src/y2019/day02/day02Input.txt");
+		cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt",0);
 		
 		for(int nounCount = 0;nounCount < 100;nounCount++) {
 			for(int verbCount = 0;verbCount<100;verbCount++) {
-				cpu.writeToMemory(nounCount, 1);
-				cpu.writeToMemory(verbCount, 2);
+				cpu.writeToCacheAtCoreId(nounCount, 1, 0);
+				cpu.writeToCacheAtCoreId(verbCount, 2, 0);
 				if(cpu.executeProgram(null, false) == 19690720) {
 					System.out.println("Result = "+((100*nounCount)+verbCount));
 					break;
