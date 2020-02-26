@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
-public class Core {
+public class Core implements Runnable{
 	
 	private int id;
 	IO io;
@@ -25,7 +25,8 @@ public class Core {
 		cache.loadProgram(path);
 	}
 	
-	public int executeProgram(/*Integer input,*/ boolean pipeOutput) {
+	@Override
+	public void run()/*public int executeProgram()*/ {
 		/*if(input != null) {
 			io.getInput().add(input);
 		}*/
@@ -70,13 +71,13 @@ public class Core {
 				/*for (Integer output : output) {
 					System.out.println(output);
 				}*/
-				return cache.data[0];
+				return /*cache.data[0]*/;
 			default:
 				head++;
 				break;
 			}
 		}
-		return -1;
+		return/* -1*/;
 		
 	}
 	
@@ -155,5 +156,4 @@ public class Core {
 		}
 		return head+4;
 	}
-
 }

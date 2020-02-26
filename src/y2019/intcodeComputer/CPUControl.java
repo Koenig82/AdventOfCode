@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -37,14 +38,22 @@ public class CPUControl {
 		cores[coreId].writeToMemory(symbol, index);
 	}
 	
-	//fixa nån slags dispatch som kan vänta in alla joins. låt tidigare
-	//varianter plocka från minne[0] från sin core via nån metod
-	//getValueAtIndex?
 	public void executePrograms() {
 		for (Core core : cores) {
-			Thread t = new Thread(() -> core.executeProgram(null, false));
+			core.run();
+		}
+		for (Core core : cores) {
+		
+		}
+		//Thread[] threads = new Thread[cores.length];
+		for(int i = 0; i < cores.length; i++) {
+			Thread t = new Thread(() -> cores[i].executeProgram());
+			threads[i] = t;
 			t.start();
-		}	
+		}
+		for (Thread thread : threads) {
+			thread.join();
+		}
 	}
 	
 	public void addInputToCore(int input, int coreId) {
