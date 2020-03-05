@@ -37,7 +37,7 @@ public class CPUControl {
 		
 	}
 
-	public void writeToCacheAtCoreId(int symbol, int index, int coreId) {
+	public void writeToCacheIndexAtCoreId(int symbol, int index, int coreId) {
 		cores[coreId].writeToMemory(symbol, index);
 	}
 	
