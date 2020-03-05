@@ -24,6 +24,8 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part2() throws Exception {
 		int corecount = 4;
+			
+		
 		//int corecount = corecountInit % 100;
 		CPUControl cpu = new CPUControl(corecount);
 		for(int i = 0; i < corecount; i++) {
