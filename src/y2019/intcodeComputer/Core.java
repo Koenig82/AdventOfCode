@@ -21,6 +21,9 @@ public class Core implements Runnable{
 	public void writeToMemory(int symbol, int index) {
 		cache.writeToMemory(symbol, index);
 	}
+	public int getFromMemory(int index) {
+		return cache.getData(index, Mode.position);
+	}
 	public void loadProgram(String path) throws UnsupportedEncodingException, IOException {
 		cache.loadProgram(path);
 	}

@@ -18,11 +18,14 @@ public class CPUControl {
 	//private Memory memory;
 	
 	private Core[] cores;
+	private Thread[] processes;
 
 	public CPUControl(int nrOfcores) {
 		cores = new Core[nrOfcores];
+		processes = new Thread[nrOfcores];
 		for(int i = 0;i<nrOfcores;i++) {
 			cores[i] = new Core(i);
+			processes[i] = new Thread(cores[i]);
 		}
 		//scanner = new Scanner(System.in);
 		//input = new ArrayDeque<>();
@@ -39,25 +42,39 @@ public class CPUControl {
 	}
 	
 	public void executePrograms() {
-		for (Core core : cores) {
-			core.run();
+		for (Thread process : processes) {
+			process.run();
 		}
-		for (Core core : cores) {
-		
+		for(Thread process : processes) {
+			try {
+				process.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//Thread[] threads = new Thread[cores.length];
-		for(int i = 0; i < cores.length; i++) {
-			Thread t = new Thread(() -> cores[i].executeProgram());
+		/*for(int i = 0; i < cores.length; i++) {
+			Thread t = new Thread(cores[i]);
+			//Thread t = new Thread(() -> cores[i].run());
 			threads[i] = t;
 			t.start();
 		}
 		for (Thread thread : threads) {
-			thread.join();
-		}
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
 	}
 	
 	public void addInputToCore(int input, int coreId) {
 		cores[coreId].io.input.add(input);
+	}
+	public int getValueFromCoreAtIndex(int coreId, int index) {
+		return cores[coreId].getFromMemory(index);
 	}
 
 	/*public int executeProgram(Integer input, boolean pipeOutput) {
