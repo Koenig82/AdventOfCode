@@ -54,24 +54,27 @@ public class Day02 extends AdventOfCode{
 				}
 			}
 			System.out.println(verbCount);
-			if(verbCount < (100-corecount)) {
-				System.out.println("ojämt");
-				for(int i = verbCount; i < 100; i++) {
+			if(verbCount > (100-corecount)) {
+				System.out.println("overblivna verbs: "+(100-verbCount));
+				for(int i = 0; i < (100-verbCount); i++) {
+					
 					cpu.writeToCacheIndexAtCoreId(nounCount, 1, i);
 					cpu.writeToCacheIndexAtCoreId(verbCount+i, 2, i);
+					verbCount++;
+					
 				}
 				//fixa nått sätt att ha dynamiskt med cores
 				cpu.executePrograms();
-				for(int i = 0; i < corecount; i++) {
+				for(int i = 0; i < (100-verbCount); i++) {
 					if(cpu.getValueFromCoreAtIndex(i, 0) == 19690720) {
 						System.out.println("Result = " + ((100*nounCount) + verbCount));
 						break;
 					}
 				}
 
-				for(int i = 0; i < corecount; i++) {
+				/*for(int i = 0; i < corecount; i++) {
 					cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt", i);
-				}
+				}*/
 			}
 			for(int i = 0; i < corecount; i++) {
 				cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt", i);
