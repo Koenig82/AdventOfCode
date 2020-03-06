@@ -23,8 +23,9 @@ public class Day02 extends AdventOfCode{
 
 	@Override
 	public void part2() throws Exception {
-		int corecount = 4;
-			
+		int corecount = 7;
+		int nounCount = 0;
+		int verbCount = 0;
 		
 		//int corecount = corecountInit % 100;
 		CPUControl cpu = new CPUControl(corecount);
@@ -32,9 +33,30 @@ public class Day02 extends AdventOfCode{
 			cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt",i);
 		}
 		
-		for(int nounCount = 0; nounCount < (100-corecount); nounCount++) {
-			for(int verbCount = 0; verbCount < (100-corecount); verbCount+=corecount) {
+		for(nounCount = 0; nounCount < (100-corecount); nounCount++) {
+			for(verbCount = 0; verbCount < (100-corecount); verbCount+=corecount) {
+				System.out.println(verbCount);
 				for(int i = 0; i < corecount; i++) {
+					cpu.writeToCacheIndexAtCoreId(nounCount, 1, i);
+					cpu.writeToCacheIndexAtCoreId(verbCount+i, 2, i);
+				}
+				//fixa nått sätt att ha dynamiskt med cores
+				cpu.executePrograms();
+				for(int i = 0; i < corecount; i++) {
+					if(cpu.getValueFromCoreAtIndex(i, 0) == 19690720) {
+						System.out.println("Result = " + ((100*nounCount) + verbCount));
+						break;
+					}
+				}
+
+				for(int i = 0; i < corecount; i++) {
+					cpu.loadProgramAtCoreId("src/y2019/day02/day02Input.txt", i);
+				}
+			}
+			System.out.println(verbCount);
+			if(verbCount < (100-corecount)) {
+				System.out.println("ojämt");
+				for(int i = verbCount; i < 100; i++) {
 					cpu.writeToCacheIndexAtCoreId(nounCount, 1, i);
 					cpu.writeToCacheIndexAtCoreId(verbCount+i, 2, i);
 				}
