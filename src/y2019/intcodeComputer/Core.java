@@ -10,14 +10,27 @@ public class Core implements Runnable{
 	IO io;
 	
 	private Memory cache;
+	boolean isPiping = false;
+	int pipeToIndex = 0;
 	
 	
-	public Core(int id) {
+	public Core(int id, IO io) {
 		this.id = id;
-		io = new IO();
+		//io = new IO();
+		this.io = io;
 		cache = new Memory();
 	}
 	
+	void setPipe(int pipeTo) {
+		if(pipeTo < 0) {
+			isPiping = false;
+			return;
+		}else {
+			isPiping = true;
+			pipeToIndex = pipeTo;
+			return;
+		}
+	}
 	public void writeToMemory(int symbol, int index) {
 		cache.writeToMemory(symbol, index);
 	}
@@ -29,17 +42,11 @@ public class Core implements Runnable{
 	}
 	
 	@Override
-	public void run()/*public int executeProgram()*/ {
-		/*if(input != null) {
-			io.getInput().add(input);
-		}*/
+	public void run() {
 		int instruction;
 		Mode[] modes = Mode.values();
 		for(int head = 0;head < cache.data.length;) {
-			
-			if(!io.output.isEmpty()) {
-				System.out.println(io.getOutput().removeFirst());
-			}
+
 			//displayMemory();
 			instruction = cache.data[head];
 			int opCode = instruction % 100;
@@ -71,16 +78,14 @@ public class Core implements Runnable{
 				head = opcode8(head, paramModeA, paramModeB);
 				break;
 			case 99:
-				/*for (Integer output : output) {
-					System.out.println(output);
-				}*/
-				return /*cache.data[0]*/;
+
+				return;
 			default:
 				head++;
 				break;
 			}
 		}
-		return/* -1*/;
+		return;
 		
 	}
 	
@@ -106,21 +111,35 @@ public class Core implements Runnable{
 	
 	private int opcode3(int head) {
 		int input;
-		if(io.getInput().isEmpty()) {
-			System.out.println("AWAITING INPUT >");
-			input = io.getScanner().nextInt();
-		}else {
-			input = io.getInput().removeFirst();
+
+		try {
+			input = io.getInput(id).take();
+			cache.writeToMemory(input, cache.data[head+1]);		
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		cache.writeToMemory(input, cache.data[head+1]);
 		
 		return head+2;
 	}
 	
 	private int opcode4(int head, Mode paramMode) {
 		int value = cache.getData(cache.data[head+1], paramMode);
-		io.getOutput().add(value);
-
+		if(!isPiping) {
+			try {
+				io.getOutput(id).put(value);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				io.getInput(pipeToIndex).put(value);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return head+2;
 	}
 	

@@ -1,5 +1,8 @@
 package y2019.day07;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import adventOfCode.AdventOfCode;
 import y2019.intcodeComputer.CPUControl;
 
@@ -11,37 +14,70 @@ public class Day07 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		//String program = "src/y2019/day07/day07Input.txt";
-		String program = "src/y2019/day07/testInput";
+		String program = "src/y2019/day07/day07Input.txt";
+		//String program = "src/y2019/day07/testInput";
 
-		CPUControl cpuA = new CPUControl();
-		cpuA.loadProgram(program);
-		int pipe = cpuA.executeProgram(4, true);
-		System.out.println(pipe);
+		CPUControl cpu = new CPUControl(5);
+		for(int i = 0; i < 5; i++) {
+			cpu.loadProgramAtCoreId(program, i);
+			if(i < 4) {
+				cpu.pipeCoreToCore(i, i+1);
+			}
+		}
 		
-		CPUControl cpuB = new CPUControl();
-		cpuB.loadProgram(program);
-		pipe = cpuB.executeProgram(3, true);
-		System.out.println(pipe);
+		int highestOutput = 0;
+		int latestOutput;
+		int[] array = {0,1,2,3,4};
+		ArrayList<List<Integer>> combinations = getCombinations(array);
 		
-		CPUControl cpuC = new CPUControl();
-		cpuC.loadProgram(program);
-		pipe = cpuC.executeProgram(2, true);
-		System.out.println(pipe);
-		
-		CPUControl cpuD = new CPUControl();
-		cpuD.loadProgram(program);
-		pipe = cpuD.executeProgram(1, true);
-		System.out.println(pipe);
-		
-		CPUControl cpuE = new CPUControl();
-		cpuE.loadProgram(program);
-		pipe = cpuE.executeProgram(0, true);
-		System.out.println(pipe);
+		for (List<Integer> list : combinations) {
+			
+			cpu.getInputFromCore(0).add(list.get(0));
+			cpu.getInputFromCore(1).add(list.get(1));
+			cpu.getInputFromCore(2).add(list.get(2));
+			cpu.getInputFromCore(3).add(list.get(3));
+			cpu.getInputFromCore(4).add(list.get(4));
+			
+			cpu.getInputFromCore(0).add(0);
+			
+			cpu.executePrograms();
+			latestOutput = cpu.getOutputFromCore(4).take();
+			if(latestOutput > highestOutput) {
+				highestOutput = latestOutput;
+			}
+	
+			/*for(int i = 0; i < 5; i++) {
+				cpu.loadProgramAtCoreId(program, i);
+			}*/
+		}
+		System.out.println("Result = " + highestOutput);
 	}
 
 	@Override
 	public void part2() throws Exception {
 
 	}
+	
+	public ArrayList<List<Integer>> getCombinations(int[] array) {
+		
+		ArrayList<List<Integer>> combinations = new ArrayList<>();
+		permute(java.util.Arrays.asList(0,1,2,3,4), combinations, 0);
+
+		return combinations;
+	}
+	
+	public void permute(java.util.List<Integer> arr, ArrayList<List<Integer>> comb, int k){
+		
+        for(int i = k; i < arr.size(); i++){
+        	
+            java.util.Collections.swap(arr, i, k);
+            permute(arr, comb, k+1);
+            java.util.Collections.swap(arr, k, i);
+        }
+        
+        if (k == arr.size() -1){
+        	List<Integer> newlist = new ArrayList<Integer>(arr) ;
+        	comb.add(newlist);
+        }
+    }
 }

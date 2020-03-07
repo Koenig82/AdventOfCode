@@ -1,42 +1,36 @@
 package y2019.intcodeComputer;
 
-import java.util.ArrayDeque;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class IO {
 	
-	private Scanner scanner;
-	
-	public Scanner getScanner() {
-		return scanner;
+	private class CoreAccess{
+		BlockingQueue<Integer> input;
+		BlockingQueue<Integer> output;
+		public CoreAccess() {
+			input = new LinkedBlockingQueue<>();
+			output = new LinkedBlockingQueue<>();
+		}
 	}
 
-	public void setScanner(Scanner scanner) {
-		this.scanner = scanner;
+	private ArrayList<CoreAccess> access;
+
+	public IO(int nrOfCores) {
+		access = new ArrayList<>();
+		for(int i = 0; i < nrOfCores; i++) {
+			access.add(new CoreAccess());
+		}
 	}
 
-	ArrayDeque<Integer> input;
-	ArrayDeque<Integer> output;
-	
-	public IO() {
-		scanner = new Scanner(System.in);
-		setInput(new ArrayDeque<>());
-		setOutput(new ArrayDeque<>());
+	public BlockingQueue<Integer> getInput(int coreId) {
+		
+		return access.get(coreId).input;
 	}
 
-	public synchronized ArrayDeque<Integer> getInput() {
-		return input;
-	}
-
-	public void setInput(ArrayDeque<Integer> input) {
-		this.input = input;
-	}
-
-	public ArrayDeque<Integer> getOutput() {
-		return output;
-	}
-
-	public void setOutput(ArrayDeque<Integer> output) {
-		this.output = output;
+	public BlockingQueue<Integer> getOutput(int coreId) {
+		
+		return access.get(coreId).output;
 	}
 }
