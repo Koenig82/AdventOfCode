@@ -17,7 +17,7 @@ public class Day07 extends AdventOfCode{
 		String program = "src/y2019/day07/day07Input.txt";
 		//String program = "src/y2019/day07/testInput";
 
-		CPUControl cpu = new CPUControl(5);
+		/*CPUControl cpu = new CPUControl(5);
 		for(int i = 0; i < 5; i++) {
 			cpu.loadProgramAtCoreId(program, i);
 			if(i < 4) {
@@ -45,17 +45,53 @@ public class Day07 extends AdventOfCode{
 			if(latestOutput > highestOutput) {
 				highestOutput = latestOutput;
 			}
-	
-			/*for(int i = 0; i < 5; i++) {
-				cpu.loadProgramAtCoreId(program, i);
-			}*/
 		}
-		System.out.println("Result = " + highestOutput);
+		System.out.println("Result = " + highestOutput);*/
 	}
 
 	@Override
 	public void part2() throws Exception {
+		//String program = "src/y2019/day07/day07Input.txt";
+		String program = "src/y2019/day07/testInput";
 
+		CPUControl cpu = new CPUControl(5);
+		for(int i = 0; i < 5; i++) {
+			cpu.loadProgramAtCoreId(program, i);
+			if(i < 4) {
+				cpu.pipeCoreToCore(i, i+1);
+			}
+		}
+		cpu.pipeCoreToCore(4,0);
+		
+		int highestOutput = 0;
+		int latestOutput;
+		int[] array = {5,6,7,8,9};
+		ArrayList<List<Integer>> combinations = getCombinations(array);
+		
+		//for (List<Integer> list : combinations) {
+			
+			/*cpu.getInputFromCore(0).add(list.get(0));
+			cpu.getInputFromCore(1).add(list.get(1));
+			cpu.getInputFromCore(2).add(list.get(2));
+			cpu.getInputFromCore(3).add(list.get(3));
+			cpu.getInputFromCore(4).add(list.get(4));*/
+			
+			cpu.getInputFromCore(0).add(9);
+			cpu.getInputFromCore(1).add(8);
+			cpu.getInputFromCore(2).add(7);
+			cpu.getInputFromCore(3).add(6);
+			cpu.getInputFromCore(4).add(5);
+			
+			cpu.getInputFromCore(0).add(0);
+			
+			cpu.executePrograms();
+			latestOutput = cpu.getOutputFromCore(4).take();
+			if(latestOutput > highestOutput) {
+				highestOutput = latestOutput;
+			}
+	
+		//}
+		System.out.println("Result = " + highestOutput);
 	}
 	
 	public ArrayList<List<Integer>> getCombinations(int[] array) {

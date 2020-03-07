@@ -39,14 +39,14 @@ public class CPUControl {
 		for (Thread process : processes) {
 			process.run();
 		}
-		for(Thread process : processes) {
+		/*for(Thread process : processes) {
 			try {
 				process.join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 	
 	public void executeXNrOfCores(int nrOfCores) {

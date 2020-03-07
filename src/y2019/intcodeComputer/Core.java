@@ -16,7 +16,6 @@ public class Core implements Runnable{
 	
 	public Core(int id, IO io) {
 		this.id = id;
-		//io = new IO();
 		this.io = io;
 		cache = new Memory();
 	}
@@ -43,6 +42,10 @@ public class Core implements Runnable{
 	
 	@Override
 	public void run() {
+		if(id != 0) {
+			System.out.println("started core "+id);
+		}
+		
 		int instruction;
 		Mode[] modes = Mode.values();
 		for(int head = 0;head < cache.data.length;) {
@@ -90,7 +93,7 @@ public class Core implements Runnable{
 	}
 	
 	private int opcode1(int head, Mode paramModeA, Mode paramModeB) {
-
+		//System.out.println("Core "+id+" opcode1");
 		int a = cache.getData(cache.data[head+1], paramModeA);
 		int b = cache.getData(cache.data[head+2], paramModeB);
 
@@ -100,7 +103,7 @@ public class Core implements Runnable{
 	}
 	
 	private int opcode2(int head, Mode paramModeA, Mode paramModeB) {
-
+		//System.out.println("Core "+id+" opcode2");
 		int a = cache.getData(cache.data[head+1], paramModeA);
 		int b = cache.getData(cache.data[head+2], paramModeB);
 
@@ -110,8 +113,8 @@ public class Core implements Runnable{
 	}
 	
 	private int opcode3(int head) {
+		//System.out.println("Core "+id+" opcode3");
 		int input;
-
 		try {
 			input = io.getInput(id).take();
 			cache.writeToMemory(input, cache.data[head+1]);		
@@ -128,6 +131,7 @@ public class Core implements Runnable{
 		if(!isPiping) {
 			try {
 				io.getOutput(id).put(value);
+				System.out.println("Core "+id+" outputed "+value);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -135,6 +139,7 @@ public class Core implements Runnable{
 		}else {
 			try {
 				io.getInput(pipeToIndex).put(value);
+				System.out.println("Core "+id+" piped "+value+" to Core " + pipeToIndex);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -144,7 +149,7 @@ public class Core implements Runnable{
 	}
 	
 	private int opcode5(int head, Mode paramModeA, Mode paramModeB) {
-		
+		//System.out.println("Core "+id+" opcode5");
 		if(cache.getData(cache.data[head+1], paramModeA) != 0) {
 			return cache.getData(cache.data[head+2], paramModeB);
 		}	
@@ -152,7 +157,7 @@ public class Core implements Runnable{
 	}
 
 	private int opcode6(int head, Mode paramModeA, Mode paramModeB) {
-
+		//System.out.println("Core "+id+" opcode6");
 		if(cache.getData(cache.data[head+1], paramModeA) == 0) {
 			return cache.getData(cache.data[head+2], paramModeB);
 		}	
@@ -160,7 +165,7 @@ public class Core implements Runnable{
 	}
 	
 	private int opcode7(int head, Mode paramModeA, Mode paramModeB) {
-
+		//System.out.println("Core "+id+" opcode7");
 		if(cache.getData(cache.data[head+1], paramModeA) < cache.getData(cache.data[head+2], paramModeB)) {
 			cache.writeToMemory(1, cache.data[head+3]);
 		}else {
@@ -170,7 +175,7 @@ public class Core implements Runnable{
 	}
 	
 	private int opcode8(int head, Mode paramModeA, Mode paramModeB) {
-
+		//System.out.println("Core "+id+" opcode8");
 		if(cache.getData(cache.data[head+1], paramModeA) == cache.getData(cache.data[head+2], paramModeB)) {
 			cache.writeToMemory(1, cache.data[head+3]);
 		}else {
