@@ -53,21 +53,20 @@ public class CPUControl {
 				e.printStackTrace();
 			}
 		}
-		//Thread[] threads = new Thread[cores.length];
-		/*for(int i = 0; i < cores.length; i++) {
-			Thread t = new Thread(cores[i]);
-			//Thread t = new Thread(() -> cores[i].run());
-			threads[i] = t;
-			t.start();
+	}
+	
+	public void executeXNrOfCores(int nrOfCores) {
+		for(int i = 0; i < nrOfCores; i++) {
+			processes[i].run();
 		}
-		for (Thread thread : threads) {
+		for(int i = 0; i < nrOfCores; i++) {
 			try {
-				thread.join();
+				processes[i].join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}*/
+		}
 	}
 	
 	public void addInputToCore(int input, int coreId) {
