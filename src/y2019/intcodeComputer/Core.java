@@ -37,9 +37,9 @@ public class Core implements Runnable{
 		Mode[] modes = Mode.values();
 		for(int head = 0;head < cache.data.length;) {
 			
-			/*if(!io.output.isEmpty()) {
-				handleOutput(pipeOutput);
-			}*/
+			if(!io.output.isEmpty()) {
+				System.out.println(io.getOutput().removeFirst());
+			}
 			//displayMemory();
 			instruction = cache.data[head];
 			int opCode = instruction % 100;

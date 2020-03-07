@@ -72,6 +72,9 @@ public class CPUControl {
 	public void addInputToCore(int input, int coreId) {
 		cores[coreId].io.input.add(input);
 	}
+	public int getOutputFromCore(int coreId) {
+		return cores[coreId].io.output.removeFirst();
+	}
 	public int getValueFromCoreAtIndex(int coreId, int index) {
 		return cores[coreId].getFromMemory(index);
 	}

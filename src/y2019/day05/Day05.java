@@ -11,15 +11,17 @@ public class Day05 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		CPUControl cpu = new CPUControl();
-		cpu.loadProgram("src/y2019/day05/day05Input.txt");
-		cpu.executeProgram(1, false);
+		CPUControl cpu = new CPUControl(1);
+		cpu.loadProgramAtCoreId("src/y2019/day05/day05Input.txt",0);
+		cpu.addInputToCore(1, 0);
+		cpu.executePrograms();
 	}
 
 	@Override
 	public void part2() throws Exception {
-		CPUControl cpu = new CPUControl();
-		cpu.loadProgram("src/y2019/day05/day05Input.txt");
-		cpu.executeProgram(5, false);
+		CPUControl cpu = new CPUControl(1);
+		cpu.loadProgramAtCoreId("src/y2019/day05/day05Input.txt",0);
+		cpu.addInputToCore(5, 0);
+		cpu.executePrograms();
 	}
 }
