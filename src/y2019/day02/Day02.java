@@ -23,7 +23,7 @@ public class Day02 extends AdventOfCode{
 
 	@Override
 	public void part2() throws Exception {
-		int corecount = 1;
+		int corecount = 4;
 		int nounCount = 0;
 		int verbCount = 0;
 		

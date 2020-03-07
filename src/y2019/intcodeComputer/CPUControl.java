@@ -17,10 +17,12 @@ public class CPUControl {
 	private IO io;
 
 	public CPUControl(int nrOfcores) {
+		
 		cores = new Core[nrOfcores];
 		processes = new Thread[nrOfcores];
 		io = new IO(nrOfcores);
-		for(int i = 0;i<nrOfcores;i++) {
+		
+		for(int i = 0; i< nrOfcores; i++) {
 			cores[i] = new Core(i, io);
 			processes[i] = new Thread(cores[i]);
 		}
@@ -37,6 +39,7 @@ public class CPUControl {
 	
 	public void executePrograms() {
 		for (Thread process : processes) {
+			System.out.println("calling run method on " +process.getId());
 			process.run();
 		}
 		/*for(Thread process : processes) {
