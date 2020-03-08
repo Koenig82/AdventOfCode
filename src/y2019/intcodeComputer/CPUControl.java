@@ -24,7 +24,7 @@ public class CPUControl {
 		
 		for(int i = 0; i< nrOfcores; i++) {
 			cores[i] = new Core(i, io);
-			processes[i] = new Thread(cores[i]);
+			//processes[i] = new Thread(cores[i]);
 		}
 	}
 	
@@ -38,24 +38,32 @@ public class CPUControl {
 	}
 	
 	public void executePrograms() {
-		for (Thread process : processes) {
-			System.out.println("calling run method on " +process.getId());
-			process.run();
+		for(int i = 0; i< processes.length; i++) {
+			
+			processes[i] = new Thread(cores[i]);
+			//System.out.println("calling run method on " +processes[i].getId());
+			//processes[i].start();
+			processes[i].run();
 		}
-		/*for(Thread process : processes) {
+		for(Thread process : processes) {
 			try {
 				process.join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}*/
+		}
 	}
 	
 	public void executeXNrOfCores(int nrOfCores) {
-		for(int i = 0; i < nrOfCores; i++) {
+		
+		for(int i = 0; i< nrOfCores; i++) {
+
+			processes[i] = new Thread(cores[i]);
+			//processes[i].start();
 			processes[i].run();
 		}
+		
 		for(int i = 0; i < nrOfCores; i++) {
 			try {
 				processes[i].join();
