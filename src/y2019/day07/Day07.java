@@ -14,7 +14,7 @@ public class Day07 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		String program = "src/y2019/day07/day07Input.txt";
+		//String program = "src/y2019/day07/day07Input.txt";
 		//String program = "src/y2019/day07/testInput";
 
 //		CPUControl cpu = new CPUControl(5);
@@ -66,9 +66,9 @@ public class Day07 extends AdventOfCode{
 		int highestOutput = 0;
 		int latestOutput;
 		int[] array = {5,6,7,8,9};
-		//ArrayList<List<Integer>> combinations = getCombinations(array);
+		ArrayList<List<Integer>> combinations = getCombinations(array);
 		
-		//for (List<Integer> list : combinations) {
+//		for (List<Integer> list : combinations) {
 			
 //			cpu.getInputFromCore(0).add(list.get(0));
 //			cpu.getInputFromCore(1).add(list.get(1));
@@ -85,13 +85,13 @@ public class Day07 extends AdventOfCode{
 			cpu.getInputFromCore(0).add(0);
 			
 			cpu.executePrograms();
-			/*latestOutput = cpu.getOutputFromCore(4).take();
+			latestOutput = cpu.getOutputFromCore(4).take();
 			if(latestOutput > highestOutput) {
 				highestOutput = latestOutput;
-			}*/
+			}
 	
-		//}
-		//System.out.println("Result = " + highestOutput);
+//		}
+		System.out.println("Result = " + highestOutput);
 	}
 	
 	public ArrayList<List<Integer>> getCombinations(int[] array) {

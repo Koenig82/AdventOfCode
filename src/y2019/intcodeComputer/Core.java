@@ -130,7 +130,7 @@ public class Core implements Runnable{
 		if(!isPiping) {
 			try {
 				io.getOutput(id).put(value);
-				//System.out.println("Core "+id+" outputed "+value);
+				System.out.println("Core "+id+" outputed "+value);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -138,7 +138,7 @@ public class Core implements Runnable{
 		}else {
 			try {
 				io.getInput(pipeToIndex).put(value);
-				//System.out.println("Core "+id+" piped "+value+" to Core " + pipeToIndex);
+				System.out.println("Core "+id+" piped "+value+" to Core " + pipeToIndex);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

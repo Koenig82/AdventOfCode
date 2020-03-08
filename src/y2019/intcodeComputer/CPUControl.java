@@ -42,8 +42,8 @@ public class CPUControl {
 			
 			processes[i] = new Thread(cores[i]);
 			//System.out.println("calling run method on " +processes[i].getId());
-			//processes[i].start();
-			processes[i].run();
+			processes[i].start();
+			//processes[i].run();
 		}
 		for(Thread process : processes) {
 			try {
@@ -60,8 +60,8 @@ public class CPUControl {
 		for(int i = 0; i< nrOfCores; i++) {
 
 			processes[i] = new Thread(cores[i]);
-			//processes[i].start();
-			processes[i].run();
+			processes[i].start();
+			//processes[i].run();
 		}
 		
 		for(int i = 0; i < nrOfCores; i++) {
