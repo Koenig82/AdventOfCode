@@ -37,6 +37,8 @@ public class CPUControl {
 		cores[coreId].writeToMemory(symbol, index);
 	}
 	
+	//kanske bara kora ett program på en core och ge nån klar signal
+	//så en ny core kan användas när den är klar
 	public void executePrograms() {
 		for(int i = 0; i< processes.length; i++) {
 			
