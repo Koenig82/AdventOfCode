@@ -12,7 +12,7 @@ public class Memory {
 	public Memory() {
 		// TODO Auto-generated constructor stub
 	}
-
+	//sluta läsa in filen varje gång man startar en core, kan ge tillbaka en lista
 	void loadProgram(String path) throws UnsupportedEncodingException, IOException {
 
 		String instructions = new String(Files.readAllBytes(Paths.get(path)), "UTF-8");
