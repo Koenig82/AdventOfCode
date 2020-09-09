@@ -30,20 +30,20 @@ public class Day07 extends AdventOfCode{
 		//int[] array = {0,1,2,3,4};
 		ArrayList<List<Integer>> combinations = getCombinations();
 		for (List<Integer> combination : combinations) {
-			c0.addInput(Long.combination.get(0));
-			c0.addInput(combination.get(0));
+			c0.addInput(Long.valueOf(combination.get(0)));
+			c0.addInput(Long.valueOf(combination.get(0)));
 			c0.run();
-			c1.addInput(combination.get(1));
-			c0.addInput(combination.get(c1.getOutput()));
+			c1.addInput(Long.valueOf(combination.get(1)));
+			c0.addInput(Long.valueOf(combination.get(c0.getOutput())));
 			c1.run();
-			c2.addInput(combination.get(2));
-			c0.addInput(combination.get(0));
+			c2.addInput(Long.valueOf(combination.get(2)));
+			c0.addInput(Long.valueOf(combination.get(0)));
 			c2.run();
-			c3.addInput(combination.get(3));
-			c0.addInput(combination.get(0));
+			c3.addInput(Long.valueOf(combination.get(3)));
+			c0.addInput(Long.valueOf(combination.get(0)));
 			c3.run();
-			c4.addInput(combination.get(4));
-			c0.addInput(combination.get(0));
+			c4.addInput(Long.valueOf(combination.get(4)));
+			c0.addInput(Long.valueOf(combination.get(0)));
 			c4.run();
 			output = core.getOutput();	
 		}
@@ -126,7 +126,7 @@ public class Day07 extends AdventOfCode{
 	public ArrayList<List<Long>> getCombinations(/*int[] array*/) {
 		
 		ArrayList<List<Long>> combinations = new ArrayList<>();
-		permute(java.util.Arrays.asList(0,1,2,3,4), combinations, 0);
+		permute(java.util.Arrays.asList(0l,1l,2l,3l,4l), combinations, 0);
 
 		return combinations;
 	}
