@@ -17,11 +17,9 @@ public class IO {
 
 	private ArrayList<CoreAccess> access;
 
-	public IO(int nrOfCores) {
+	public IO() {
 		access = new ArrayList<>();
-		for(int i = 0; i < nrOfCores; i++) {
 			access.add(new CoreAccess());
-		}
 	}
 
 	public BlockingQueue<Integer> getInput(int coreId) {

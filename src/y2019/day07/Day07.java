@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adventOfCode.AdventOfCode;
-import y2019.intcodeComputer.CPUControl;
+import y2019.intcodeComputer.Threadpool;
 
 public class Day07 extends AdventOfCode{
 
@@ -54,7 +54,7 @@ public class Day07 extends AdventOfCode{
 		//String program = "src/y2019/day07/day07Input.txt";
 		String program = "src/y2019/day07/testInput";
 
-		CPUControl cpu = new CPUControl(5);
+		Threadpool cpu = new Threadpool(5);
 		for(int i = 0; i < 5; i++) {
 			cpu.loadProgramAtCoreId(program, i);
 			if(i < 4) {

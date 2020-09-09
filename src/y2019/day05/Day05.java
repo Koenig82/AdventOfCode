@@ -1,9 +1,13 @@
 package y2019.day05;
 
-import adventOfCode.AdventOfCode;
-import y2019.intcodeComputer.CPUControl;
+import java.util.List;
 
-public class Day05 extends AdventOfCode{
+import adventOfCode.AdventOfCode;
+import y2019.intcodeComputer.Threadpool;
+import y2019.intcodeComputer.IntCPU;
+import y2019.intcodeComputer.Memory;
+
+public class Day05 extends AdventOfCode {
 
 	public static void main(String[] args) {
 		new Day05().run();
@@ -11,23 +15,24 @@ public class Day05 extends AdventOfCode{
 
 	@Override
 	public void part1() throws Exception {
-		CPUControl cpu = new CPUControl(1);
-		cpu.loadProgramAtCoreId("src/y2019/day05/day05Input.txt",0);
-		cpu.getInputFromCore(0).add(1);
-		cpu.executePrograms();
-		while(!cpu.getOutputFromCore(0).isEmpty()) {
-			System.out.println(cpu.getOutputFromCore(0).remove());
+
+		List<Long> program = Memory.loadProgram("src/y2019/day05/day05Input.txt");
+		IntCPU core = new IntCPU(program);
+		core.addInput(1l);
+		core.run();
+		while (core.hasOutput()) {
+			System.out.println(core.getOutput());
 		}
 	}
 
 	@Override
 	public void part2() throws Exception {
-		CPUControl cpu = new CPUControl(1);
-		cpu.loadProgramAtCoreId("src/y2019/day05/day05Input.txt",0);
-		cpu.getInputFromCore(0).add(5);
-		cpu.executePrograms();
-		while(!cpu.getOutputFromCore(0).isEmpty()) {
-			System.out.println(cpu.getOutputFromCore(0).remove());
+		List<Long> program = Memory.loadProgram("src/y2019/day05/day05Input.txt");
+		IntCPU core = new IntCPU(program);
+		core.addInput(5l);
+		core.run();
+		while (core.hasOutput()) {
+			System.out.println(core.getOutput());
 		}
 	}
 }
