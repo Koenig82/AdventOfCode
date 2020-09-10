@@ -1,5 +1,9 @@
 package y2019.day18;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 import adventOfCode.AdventOfCode;
 
 public class Day18 extends AdventOfCode{
@@ -20,5 +24,10 @@ public class Day18 extends AdventOfCode{
 	public void part2() throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2019/day18/day18Input.txt");
 	}
 }

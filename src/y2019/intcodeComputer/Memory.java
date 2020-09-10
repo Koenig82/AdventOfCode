@@ -23,10 +23,9 @@ public class Memory {
 			data[i] = program.get(i).intValue();
 		}
 	}
-	//sluta läsa in filen varje gång man startar en core, kan ge tillbaka en lista
-	public static List<Long> loadProgram(String path) throws UnsupportedEncodingException, IOException {
+	
+	public static List<Long> loadProgram(String instructions) throws UnsupportedEncodingException, IOException {
 
-		String instructions = new String(Files.readAllBytes(Paths.get(path)), "UTF-8");
 		String[] substrings = instructions.split(",");
 		
 		List<Long> memory = new ArrayList<Long>(substrings.length);

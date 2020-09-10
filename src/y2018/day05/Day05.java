@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 import adventOfCode.AdventOfCode;
@@ -17,18 +18,18 @@ public class Day05 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		char[] input = getInput();
+		char[] input = this.input.get(0).toCharArray();
 		System.out.println("Result = "+reactPolymers(input));
 	}
 
 	@Override
 	public void part2() throws Exception {
 		
-		char[] input = getInput();
+		char[] input = this.input.get(0).toCharArray();
 		int lowestResult = input.length;
 		int tempResult;
 		for(int i = 97; i <= 122; i++) {
-			input = getInput();
+			input = this.input.get(0).toCharArray();
 			input = removeAllElementsOfType(input, i);
 			tempResult = reactPolymers(input);
 			if(tempResult < lowestResult) {
@@ -36,21 +37,6 @@ public class Day05 extends AdventOfCode{
 			}
 		}
 		System.out.println("Result = "+lowestResult);
-	}
-
-	private char[] getInput() {
-		
-		StringBuilder stringBuilder = new StringBuilder();
-
-        try (Stream<String> stream = Files.lines( Paths.get("src/y2018/day05/day05Input.txt"), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> stringBuilder.append(s));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }      
-        String string = stringBuilder.toString();
-		
-		return string.toCharArray();
 	}
 	
 	private int reactPolymers(char[] array) {
@@ -98,5 +84,10 @@ public class Day05 extends AdventOfCode{
 			}
 		}
 		return removeBlanks(array, removeCount);
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day05/day05Input.txt");
 	}
 }

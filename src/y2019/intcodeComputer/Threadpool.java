@@ -45,6 +45,12 @@ public class Threadpool {
 //		cores[coreIdA].setPipe(coreIdB);
 //	}
 
+	public Threadpool() {
+		threadpool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+	}
+
+
+
 	public void waitUntilDone() {
 		threadpool.shutdown();
 		try {
@@ -60,5 +66,9 @@ public class Threadpool {
 			core.run();
 			after.run();
 		});
+	}
+	
+	public void runInParallell(Runnable core) {
+		threadpool.execute(core);
 	}
 }

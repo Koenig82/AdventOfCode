@@ -18,8 +18,7 @@ public class Day01 extends AdventOfCode {
 	public void part1() throws Exception {
 		
 		int sum = 0;
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day01/day01Input.txt"));
-		for(String line : readAllLines) {
+		for(String line : input) {
 			sum += Integer.parseInt(line);
 		} 
 		System.out.println("Result = "+sum);
@@ -30,14 +29,13 @@ public class Day01 extends AdventOfCode {
 	@Override
 	public void part2() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day01/Day01Input.txt"));
 		Set<Integer> results = new HashSet<>();
 		results.add(0);
 		int sum = 0;
 		int numberAsInt = 0;
 		
 		while(true) {
-			for (String numberAsString : readAllLines) {
+			for (String numberAsString : input) {
 				numberAsInt = Integer.parseInt(numberAsString);
 				sum = sum + numberAsInt;
 				if(!results.add(sum)) {
@@ -46,5 +44,10 @@ public class Day01 extends AdventOfCode {
 				}
 			}
 		}		
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day01/day01Input.txt");
 	}
 }

@@ -37,7 +37,7 @@ public class Day03 extends AdventOfCode {
 
 	private List<Wire> getInput() throws UnsupportedEncodingException, IOException {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2019/day03/day03Input.txt"));
+		List<String> readAllLines = input;
 		List<Wire> wires = new ArrayList<>();
 		
 		for(String line : readAllLines) {
@@ -302,6 +302,11 @@ public class Day03 extends AdventOfCode {
 		public String toString() {
 			return "Instruction [dir=" + dir + ", length=" + length + "]";
 		}
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2019/day03/Day03Input.txt");
 	}
 
 }

@@ -7,30 +7,14 @@ import java.util.Scanner;
 
 public class IntCPU implements Runnable {
 
-	private int id;
-
+	private boolean halted = false;
 	private Memory memory;
-	boolean isPiping = false;
 	int pipeToIndex = 0;
-
-	public IntCPU(int id, IO io) {
-		this.id = id;
-		// cache = new Memory();
-	}
+	int head = 0;
+	private static final Mode[] modes = Mode.values();
 
 	public IntCPU(List<Long> program) {
 		memory = new Memory(program);
-	}
-
-	void setPipe(int pipeTo) {
-		if (pipeTo < 0) {
-			isPiping = false;
-			return;
-		} else {
-			isPiping = true;
-			pipeToIndex = pipeTo;
-			return;
-		}
 	}
 
 	public void writeToMemory(int symbol, int index) {
@@ -41,142 +25,139 @@ public class IntCPU implements Runnable {
 		return memory.getData(index, Mode.position);
 	}
 
-	public void loadProgram(String path) throws UnsupportedEncodingException, IOException {
-		memory.loadProgram(path);
-	}
-	
 	public void addInput(Long input) {
 		memory.input.offer(input);
 	}
+
 	public Long getOutput() {
 		return memory.output.remove();
 	}
+
 	public boolean hasOutput() {
 		return !memory.output.isEmpty();
+	}
+	public boolean isHalted() {
+		return halted;
 	}
 
 	@Override
 	public void run() {
-		// if(id != 0) {
-		// System.out.println("started core "+id+" piping: "+isPiping+ " to core
-		// "+pipeToIndex);
-		// }
-		int instruction;
-		Mode[] modes = Mode.values();
-		for (int head = 0; head < memory.data.length;) {
 
+		while (!halted) {
 			// displayMemory();
-			instruction = memory.data[head];
+			int instruction = memory.data[head];
 			int opCode = instruction % 100;
-			Mode paramModeA = modes[instruction / 100 % Mode.values().length];
-			Mode paramModeB = modes[instruction / 1000 % Mode.values().length];
+			Mode paramModeA = modes[instruction / 100 % 10];
+			Mode paramModeB = modes[instruction / 1000 % 10];
 			switch (opCode) {
 			case 1:
-				head = opcode1(head, paramModeA, paramModeB);
+				opcode1(paramModeA, paramModeB);
 				break;
 			case 2:
-				head = opcode2(head, paramModeA, paramModeB);
+				opcode2(paramModeA, paramModeB);
 				break;
 			case 3:
-				head = opcode3(head);
+				if(!opcode3()) {
+					return;
+				}
 				break;
 			case 4:
-				head = opcode4(head, paramModeA);
+				opcode4(paramModeA);
 				break;
 			case 5:
-				head = opcode5(head, paramModeA, paramModeB);
+				opcode5(paramModeA, paramModeB);
 				break;
 			case 6:
-				head = opcode6(head, paramModeA, paramModeB);
+				opcode6(paramModeA, paramModeB);
 				break;
 			case 7:
-				head = opcode7(head, paramModeA, paramModeB);
+				opcode7(paramModeA, paramModeB);
 				break;
 			case 8:
-				head = opcode8(head, paramModeA, paramModeB);
+				opcode8(paramModeA, paramModeB);
 				break;
 			case 99:
-
+				halted = true;
 				return;
 			default:
-				head++;
-				break;
+				throw new RuntimeException("Unknown instruction " + opCode);
 			}
 		}
-		return;
-
 	}
 
-	private int opcode1(int head, Mode paramModeA, Mode paramModeB) {
+	private void opcode1( Mode paramModeA, Mode paramModeB) {
 		// System.out.println("Core "+id+" opcode1");
 		int a = memory.getData(memory.data[head + 1], paramModeA);
 		int b = memory.getData(memory.data[head + 2], paramModeB);
 
 		memory.writeToMemory(a + b, memory.data[head + 3]);
-
-		return head + 4;
+		head+=4;
 	}
 
-	private int opcode2(int head, Mode paramModeA, Mode paramModeB) {
+	private void opcode2(Mode paramModeA, Mode paramModeB) {
 		// System.out.println("Core "+id+" opcode2");
 		int a = memory.getData(memory.data[head + 1], paramModeA);
 		int b = memory.getData(memory.data[head + 2], paramModeB);
 
 		memory.writeToMemory(a * b, memory.data[head + 3]);
-
-		return head + 4;
+		head+=4;
 	}
 
-	private int opcode3(int head) {
+	private boolean opcode3() {
 		// System.out.println("Core "+id+" opcode3");
 		Long input = memory.input.poll();
-
-		memory.writeToMemory(input.intValue(), memory.data[head + 1]);
-
-		return head + 2;
+		if (input != null) {
+			memory.writeToMemory(input.intValue(), memory.data[head + 1]);
+			head+=2;
+			return true;
+		}else {
+			return false;
+		}
 	}
 
-	private int opcode4(int head, Mode paramMode) {
+	private void opcode4(Mode paramMode) {
 		long value = memory.getData(memory.data[head + 1], paramMode);
 		memory.output.offer(value);
-		//System.out.println("Core " + id + " outputed " + value);
+		// System.out.println("Core " + id + " outputed " + value);
 
-		return head + 2;
+		head += 2;
 	}
 
-	private int opcode5(int head, Mode paramModeA, Mode paramModeB) {
+	private void opcode5(Mode paramModeA, Mode paramModeB) {
 		// System.out.println("Core "+id+" opcode5");
 		if (memory.getData(memory.data[head + 1], paramModeA) != 0) {
-			return memory.getData(memory.data[head + 2], paramModeB);
+			head = memory.getData(memory.data[head + 2], paramModeB);
+		}else {
+			head += 3;
 		}
-		return head + 3;
 	}
 
-	private int opcode6(int head, Mode paramModeA, Mode paramModeB) {
+	private void opcode6(Mode paramModeA, Mode paramModeB) {
 		// System.out.println("Core "+id+" opcode6");
 		if (memory.getData(memory.data[head + 1], paramModeA) == 0) {
-			return memory.getData(memory.data[head + 2], paramModeB);
+			head = memory.getData(memory.data[head + 2], paramModeB);
+		}else {
+			head += 3;
 		}
-		return head + 3;
 	}
 
-	private int opcode7(int head, Mode paramModeA, Mode paramModeB) {
+	private void opcode7(Mode paramModeA, Mode paramModeB) {
 		// System.out.println("Core "+id+" opcode7");
 		if (memory.getData(memory.data[head + 1], paramModeA) < memory.getData(memory.data[head + 2], paramModeB)) {
 			memory.writeToMemory(1, memory.data[head + 3]);
 		} else {
 			memory.writeToMemory(0, memory.data[head + 3]);
 		}
-		return head + 4;
+		head += 4;
 	}
 
-	private int opcode8(int head, Mode paramModeA, Mode paramModeB) {
+	private void opcode8(Mode paramModeA, Mode paramModeB) {
 		// System.out.println("Core "+id+" opcode8");
 		if (memory.getData(memory.data[head + 1], paramModeA) == memory.getData(memory.data[head + 2], paramModeB)) {
 			memory.writeToMemory(1, memory.data[head + 3]);
 		} else {
 			memory.writeToMemory(0, memory.data[head + 3]);
 		}
-		return head + 4;
+		head += 4;
 	}
 }

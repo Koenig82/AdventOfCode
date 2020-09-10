@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
@@ -50,32 +51,27 @@ public class Day04 extends AdventOfCode{
 	}
 	
 	private TreeSet<Event> getEvents() throws NumberFormatException, IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("src/y2018/day04/day04Input.txt"));
 		
 		TreeSet<Event> eventlist = new TreeSet<>();
-		try {
-			String line;
-			while ((line = reader.readLine()) != null) {
-				 
-				LocalDateTime time = LocalDateTime.parse(line.substring(1, 17), formatter);
-				
-				String[] eventSubstring = line.substring(19).split(" ");
-				if(eventSubstring.length > 2) {
-					eventlist.add(new Event(time, true, Integer.parseInt(eventSubstring[1].substring(1))));
-				}else {
-					if(eventSubstring[0].matches("wakes")) {
-						eventlist.add(new Event(time, true));
-					}else {
-						eventlist.add(new Event(time, false));
-					}
-				}	
+		for (String line : input) {
+
+			LocalDateTime time = LocalDateTime.parse(line.substring(1, 17), formatter);
+
+			String[] eventSubstring = line.substring(19).split(" ");
+			if (eventSubstring.length > 2) {
+				eventlist.add(new Event(time, true, Integer.parseInt(eventSubstring[1].substring(1))));
+			} else {
+				if (eventSubstring[0].matches("wakes")) {
+					eventlist.add(new Event(time, true));
+				} else {
+					eventlist.add(new Event(time, false));
+				}
 			}
-		} finally {
-			reader.close();
 		}
+
 		return eventlist;
 	}
-	
+
 	private HashMap<Integer,int[]> getSleepingShifts(TreeSet<Event> eventlist){
 		
 		HashMap<Integer,int[]> shifts = new HashMap<>();
@@ -185,5 +181,10 @@ public class Day04 extends AdventOfCode{
 		public int compareTo(Event o) {
 			return timestamp.compareTo(o.timestamp);
 		}
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day04/day04Input.txt");
 	}
 }

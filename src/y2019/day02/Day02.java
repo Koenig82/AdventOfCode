@@ -1,5 +1,7 @@
 package y2019.day02;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import adventOfCode.AdventOfCode;
@@ -16,7 +18,7 @@ public class Day02 extends AdventOfCode {
 	@Override
 	public void part1() throws Exception {
 
-		List<Long> program = Memory.loadProgram("src/y2019/day02/day02Input.txt");
+		List<Long> program = Memory.loadProgram(input.get(0));
 		IntCPU core = new IntCPU(program);
 		core.writeToMemory(12, 1);
 		core.writeToMemory(2, 2);
@@ -28,7 +30,7 @@ public class Day02 extends AdventOfCode {
 	public void part2() throws Exception {
 		int corecount = Runtime.getRuntime().availableProcessors();
 
-		List<Long> program = Memory.loadProgram("src/y2019/day02/day02Input.txt");
+		List<Long> program = Memory.loadProgram(input.get(0));
 		Threadpool cpu = new Threadpool(corecount);
 
 		for (int nounCount = 0; nounCount < 100; nounCount++) {
@@ -47,5 +49,10 @@ public class Day02 extends AdventOfCode {
 			}
 		}
 		cpu.waitUntilDone();
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2019/day02/Day02Input.txt");
 	}
 }

@@ -1,5 +1,8 @@
 package y2019.day04;
 
+import java.util.Collections;
+import java.util.List;
+
 import adventOfCode.AdventOfCode;
 
 public class Day04 extends AdventOfCode{
@@ -90,5 +93,10 @@ public class Day04 extends AdventOfCode{
 		}else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return Collections.EMPTY_LIST;
 	}
 }

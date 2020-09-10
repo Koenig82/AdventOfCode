@@ -16,7 +16,7 @@ public class Day05 extends AdventOfCode {
 	@Override
 	public void part1() throws Exception {
 
-		List<Long> program = Memory.loadProgram("src/y2019/day05/day05Input.txt");
+		List<Long> program = Memory.loadProgram(input.get(0));
 		IntCPU core = new IntCPU(program);
 		core.addInput(1l);
 		core.run();
@@ -27,12 +27,17 @@ public class Day05 extends AdventOfCode {
 
 	@Override
 	public void part2() throws Exception {
-		List<Long> program = Memory.loadProgram("src/y2019/day05/day05Input.txt");
+		List<Long> program = Memory.loadProgram(input.get(0));
 		IntCPU core = new IntCPU(program);
 		core.addInput(5l);
 		core.run();
 		while (core.hasOutput()) {
 			System.out.println(core.getOutput());
 		}
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2019/day05/Day05Input.txt");
 	}
 }

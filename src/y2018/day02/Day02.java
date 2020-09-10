@@ -18,7 +18,6 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day02/day02Input.txt"));
 		Map<Character,Integer> counts = new HashMap<>();
 
 		int twos = 0;
@@ -26,7 +25,7 @@ public class Day02 extends AdventOfCode{
 		int twosPoint = 0;
 		int threesPoint = 0;
 
-		for (String word : readAllLines) {
+		for (String word : input) {
 			counts.clear();
 			twos = 0;
 			threes = 0;
@@ -58,17 +57,15 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part2() throws Exception {
 		
-		List<String> readAllLines = Files.readAllLines(Paths.get("src/y2018/day02/Day02Input.txt"));
-		
 		Pair<String,Integer> defaultValue = new Pair<>("",0);
 		Map<String, Pair<String,Integer>> greatestMatch = new HashMap<>();
 		int count = 0;
 		
-		for (String word : readAllLines) {
+		for (String word : input) {
 			
 			greatestMatch.put(word, defaultValue);
 
-			for(String compareWith : readAllLines) {
+			for(String compareWith : input) {
 				count = 0;
 				for (int i = 0;i < word.toCharArray().length; i++) {
 					if(word.charAt(i) == compareWith.charAt(i)) {
@@ -103,5 +100,10 @@ public class Day02 extends AdventOfCode{
 			}
 		}
 		System.out.println("Result = "+result);	
+	}
+
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day02/day02Input.txt");
 	}
 }
