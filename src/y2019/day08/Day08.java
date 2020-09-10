@@ -11,12 +11,12 @@ public class Day08  extends AdventOfCode{
 
 	@Override
 	public List<String> readInput() throws Exception {
-		return readFile("src/y2019/day07/day07Input.txt");
+		return readFile("src/y2019/day08/day08Input.txt");
 	}
 
 	@Override
 	public void part1() throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
