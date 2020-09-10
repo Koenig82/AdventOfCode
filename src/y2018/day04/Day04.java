@@ -14,12 +14,18 @@ import adventOfCode.AdventOfCode;
 
 public class Day04 extends AdventOfCode{
 
+	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+	
 	public static void main(String[] args) {	
 		new Day04().run();
 	}
 	
-	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day04/day04Input.txt");
+	}
+	
 	@Override
 	public void part1() throws Exception {
 		TreeSet<Event> eventlist = getEvents();
@@ -183,8 +189,4 @@ public class Day04 extends AdventOfCode{
 		}
 	}
 
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2018/day04/day04Input.txt");
-	}
 }

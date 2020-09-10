@@ -17,12 +17,10 @@ public class Day08  extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		
 	}
 
 	@Override
 	public void part2() throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -15,6 +15,11 @@ public class Day03 extends AdventOfCode {
 	}
 
 	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day03/day03Input.txt");
+	}
+	
+	@Override
 	public void part1() throws Exception {
 		int[][] cloth = new int[1000][1000];
 		int overlapcount = 0;
@@ -43,7 +48,6 @@ public class Day03 extends AdventOfCode {
 				}
 			}
 		}
-
 		System.out.println("Result = " + overlapcount);
 	}
 
@@ -83,15 +87,8 @@ public class Day03 extends AdventOfCode {
 				}
 			}
 		}
-
 		for (Integer s : candidates) {
 			System.out.println("Result = " + s);
 		}
 	}
-
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2018/day03/day03Input.txt");
-	}
-
 }

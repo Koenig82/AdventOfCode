@@ -15,6 +15,11 @@ public class Day01 extends AdventOfCode {
 	}
 	
 	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day01/day01Input.txt");
+	}
+	
+	@Override
 	public void part1() throws Exception {
 		
 		int sum = 0;
@@ -46,8 +51,4 @@ public class Day01 extends AdventOfCode {
 		}		
 	}
 
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2018/day01/day01Input.txt");
-	}
 }

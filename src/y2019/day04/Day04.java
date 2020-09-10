@@ -13,6 +13,11 @@ public class Day04 extends AdventOfCode{
 	}
 
 	@Override
+	public List<String> readInput() throws Exception {
+		return Collections.EMPTY_LIST;
+	}
+	
+	@Override
 	public void part1() throws Exception {
 		int possibilities = 0;
 		for(int i = 158127; i < 624576; i++) {
@@ -95,8 +100,4 @@ public class Day04 extends AdventOfCode{
 		}
 	}
 
-	@Override
-	public List<String> readInput() throws Exception {
-		return Collections.EMPTY_LIST;
-	}
 }

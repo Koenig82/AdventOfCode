@@ -21,6 +21,11 @@ public class Day03 extends AdventOfCode {
 	}
 
 	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2019/day03/Day03Input.txt");
+	}
+	
+	@Override
 	public void part1() throws Exception {
 		List<Wire> wires = getInput();
 		WireGrid grid = new WireGrid(wires);
@@ -304,9 +309,5 @@ public class Day03 extends AdventOfCode {
 		}
 	}
 
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2019/day03/Day03Input.txt");
-	}
 
 }

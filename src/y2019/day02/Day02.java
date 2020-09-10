@@ -16,6 +16,11 @@ public class Day02 extends AdventOfCode {
 	}
 
 	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2019/day02/Day02Input.txt");
+	}
+	
+	@Override
 	public void part1() throws Exception {
 
 		List<Long> program = Memory.loadProgram(input.get(0));
@@ -51,8 +56,4 @@ public class Day02 extends AdventOfCode {
 		cpu.waitUntilDone();
 	}
 
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2019/day02/Day02Input.txt");
-	}
 }

@@ -14,6 +14,11 @@ public class Day01 extends AdventOfCode {
 	}
 
 	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2019/day01/Day01Input.txt");
+	}
+	
+	@Override
 	public void part1() throws Exception {
 
 		int totalFuelNeeded = 0;
@@ -40,11 +45,5 @@ public class Day01 extends AdventOfCode {
 			}
 		}
 		System.out.println("Result = " + totalFuelNeeded);
-	}
-
-
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2019/day01/Day01Input.txt");
 	}
 }

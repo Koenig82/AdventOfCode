@@ -16,6 +16,11 @@ public class Day02 extends AdventOfCode{
 	}
 
 	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day02/day02Input.txt");
+	}
+	
+	@Override
 	public void part1() throws Exception {
 		
 		Map<Character,Integer> counts = new HashMap<>();
@@ -102,8 +107,4 @@ public class Day02 extends AdventOfCode{
 		System.out.println("Result = "+result);	
 	}
 
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2018/day02/day02Input.txt");
-	}
 }

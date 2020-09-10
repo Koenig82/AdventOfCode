@@ -16,8 +16,12 @@ public class Day05 extends AdventOfCode{
 	}
 
 	@Override
+	public List<String> readInput() throws Exception {
+		return readFile("src/y2018/day05/day05Input.txt");
+	}
+	
+	@Override
 	public void part1() throws Exception {
-		
 		char[] input = this.input.get(0).toCharArray();
 		System.out.println("Result = "+reactPolymers(input));
 	}
@@ -84,10 +88,5 @@ public class Day05 extends AdventOfCode{
 			}
 		}
 		return removeBlanks(array, removeCount);
-	}
-
-	@Override
-	public List<String> readInput() throws Exception {
-		return readFile("src/y2018/day05/day05Input.txt");
 	}
 }
