@@ -45,14 +45,14 @@ public class Day08  extends AdventOfCode{
 		
 		List<String[]> layers = getPicture(25,6);
 		List<char[]> fullpicture = new ArrayList<>();
-		String myName = "3333333333333333333333333";
+		String empty = "2222222222222222222222222";
 		for(int i = 0;i<6;i++) {
-			fullpicture.add(myName.toCharArray());
+			fullpicture.add(empty.toCharArray());
 		}
 		for (String[] layer : layers) {
 			for(int i = 0; i < 6;i++) {
 				for(int j = 0;j < 25; j++) {
-					if(fullpicture.get(i)[j] == '3' || fullpicture.get(i)[j] == '2') {
+					if(fullpicture.get(i)[j] == '2') {
 						fullpicture.get(i)[j] = layer[i].charAt(j);
 					}
 				}
