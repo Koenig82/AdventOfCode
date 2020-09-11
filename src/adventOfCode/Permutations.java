@@ -25,10 +25,8 @@ public class Permutations {
 				
 				if(k % 2 == 0) {
 					Collections.swap(arr, i, k-1);
-					
 				}else {
 					Collections.swap(arr, 0, k-1);
-					
 				}
 				permute(arr, comb, k-1);
 			}

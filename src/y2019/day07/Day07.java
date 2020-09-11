@@ -55,7 +55,7 @@ public class Day07 extends AdventOfCode {
 
 	@Override
 	public void part2() throws Exception {
-		//List<Long> program = Memory.loadProgram("src/y2019/day07/testInput");
+		
 		List<Long> program = Memory.loadProgram(input.get(0));
 
 		AtomicLong highestOutput = new AtomicLong(0);
