@@ -16,7 +16,6 @@ public class Day08  extends AdventOfCode{
 	@Override
 	public List<String> readInput() throws Exception {
 		return readFile("src/y2019/day08/day08Input.txt");
-		//return readFile("src/y2019/day08/testInput");
 	}
 
 	@Override
@@ -43,15 +42,27 @@ public class Day08  extends AdventOfCode{
 
 	@Override
 	public void part2() throws Exception {
-		List<String[]> layers = getPicture(25,6);
-		String[] fullpicture = splitStringEvery("3333333333333333333333333", 6);
 		
-		for (int i = 0; i < layers.size() ; i++) {
-			for (int j = 0; j < 6; j++) {
-				for (String string : layers.get(i)) {
-					if(fullpicture[] == '3' || string.charAt(j))
+		List<String[]> layers = getPicture(25,6);
+		List<char[]> fullpicture = new ArrayList<>();
+		String myName = "3333333333333333333333333";
+		for(int i = 0;i<6;i++) {
+			fullpicture.add(myName.toCharArray());
+		}
+		for (String[] layer : layers) {
+			for(int i = 0; i < 6;i++) {
+				for(int j = 0;j < 25; j++) {
+					if(fullpicture.get(i)[j] == '3' || fullpicture.get(i)[j] == '2') {
+						fullpicture.get(i)[j] = layer[i].charAt(j);
+					}
 				}
 			}
+		}
+		for (char[] row : fullpicture) {
+			for (char symbol : row) {
+				System.out.print(symbol);
+			}
+			System.out.println();
 		}
 	}
 	
@@ -82,7 +93,7 @@ public class Day08  extends AdventOfCode{
 	    for (int i = 0; i < lastIndex; i++) {
 	        result[i] = s.substring(j, j + interval);
 	        j += interval;
-	    } //Add the last bit
+	    }
 	    result[lastIndex] = s.substring(j);
 
 	    return result;
