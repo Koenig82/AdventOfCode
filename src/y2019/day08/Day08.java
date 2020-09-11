@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import adventOfCode.AdventOfCode;
+import sun.tools.tree.NewArrayExpression;
 
 public class Day08  extends AdventOfCode{
 
@@ -21,17 +22,11 @@ public class Day08  extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		
-		List<String[]> layers = new ArrayList<>();
-		int pictureLength = 6;
-		int pictureWidth = 25;
+		List<String[]> layers = getPicture(25,6);
 		long lowestCount = Long.MAX_VALUE;
-		
-		String[] images = splitStringEvery(input.get(0), (pictureLength*pictureWidth));
-		for (String string : images) {
-			layers.add(splitStringEvery(string, pictureWidth));
-		}
 		int currentIndex = 0;
 		int indexOfLowest = 0;
+		
 		for (String[] layer : layers) {
 			long number = getNumberCountFromLayer(0, layer);
 			if(number < lowestCount) {
@@ -40,15 +35,34 @@ public class Day08  extends AdventOfCode{
 			}
 			currentIndex++;
 		}
-		System.out.println(lowestCount);
 		long ones = getNumberCountFromLayer(1, layers.get(indexOfLowest));
 		long twos = getNumberCountFromLayer(2, layers.get(indexOfLowest));
-		System.out.println(ones*twos);
+
+		System.out.println("Result = " + ones*twos);
 	}
 
 	@Override
 	public void part2() throws Exception {
+		List<String[]> layers = getPicture(25,6);
+		String[] fullpicture = splitStringEvery("3333333333333333333333333", 6);
 		
+		for (int i = 0; i < layers.size() ; i++) {
+			for (int j = 0; j < 6; j++) {
+				for (String string : layers.get(i)) {
+					if(fullpicture[] == '3' || string.charAt(j))
+				}
+			}
+		}
+	}
+	
+	private List<String[]> getPicture(int width, int length){
+		List<String[]> layers = new ArrayList<>();
+		
+		String[] images = splitStringEvery(input.get(0), (length*width));
+		for (String string : images) {
+			layers.add(splitStringEvery(string, width));
+		}
+		return layers;
 	}
 	
 	private long getNumberCountFromLayer(int number, String[] layer) {
