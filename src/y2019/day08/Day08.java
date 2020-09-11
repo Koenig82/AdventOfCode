@@ -3,9 +3,7 @@ package y2019.day08;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import adventOfCode.AdventOfCode;
-import sun.tools.tree.NewArrayExpression;
 
 public class Day08  extends AdventOfCode{
 
