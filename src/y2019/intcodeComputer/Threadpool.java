@@ -19,7 +19,6 @@ import java.util.function.Supplier;
 public class Threadpool {
 	
 	//private Queue<> cores;
-	private IO io;
 	private ExecutorService threadpool;
 	
 	public Threadpool(int nrOfcores) {
