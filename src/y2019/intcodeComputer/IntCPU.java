@@ -9,7 +9,6 @@ public class IntCPU implements Runnable {
 
 	private boolean halted = false;
 	private Memory memory;
-	int pipeToIndex = 0;
 	int head = 0;
 	private static final Mode[] modes = Mode.values();
 
