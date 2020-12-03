@@ -1,6 +1,7 @@
 package y2020.day02;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import adventOfCode.AdventOfCode;
 
@@ -18,6 +19,7 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		int counter = 0;
+		Pattern pattern = 
 		for (String string : input) {
 			if(checkValidity(Integer.parseInt(string.valueOf(string.charAt(0))), 
 					      Integer.parseInt(string.valueOf(string.charAt(2))),
