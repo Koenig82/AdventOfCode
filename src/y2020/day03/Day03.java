@@ -39,7 +39,6 @@ public class Day03 extends AdventOfCode{
 		int[] down = {1,1,1,1,2};
 		long value = 1;
 		for (int index = 0; index < right.length; index++) {
-			//System.out.println(index);
 			int row = 0;
 			int col = 0;
 			int treeCount = 0;
