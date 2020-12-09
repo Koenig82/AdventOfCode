@@ -1,6 +1,7 @@
 package y2020.day02;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import adventOfCode.AdventOfCode;
@@ -19,12 +20,15 @@ public class Day02 extends AdventOfCode{
 	@Override
 	public void part1() throws Exception {
 		int counter = 0;
-		Pattern pattern = 
+		
 		for (String string : input) {
-			if(checkValidity(Integer.parseInt(string.valueOf(string.charAt(0))), 
-					      Integer.parseInt(string.valueOf(string.charAt(2))),
-					      string.charAt(4),
-					      string.substring(7))) {
+			Matcher matcher = Pattern.compile("^([0-9]+)-(\\d+) (\\w): (.+)").matcher(string);
+			matcher.find();
+			
+			if(checkValidity(Integer.parseInt(matcher.group(1)), 
+					      Integer.parseInt(matcher.group(2)),
+					      matcher.group(3).charAt(0),
+					      matcher.group(4))) {
 				counter++;
 			}
 		}
@@ -37,12 +41,9 @@ public class Day02 extends AdventOfCode{
 		// TODO Auto-generated method stub
 		
 	}
-	^([0-9]+)-(\d+) (\w): (.+)
-	boolean checkValidity(int a,int b, char x, String input){
-		String newstring = input.replaceAll("[^"+x+"]", "");
-		//System.out.println(newstring);
-		//System.out.println(input.chars().filter(c -> c==x).count());
-		
+	
+	boolean checkValidity(int a,int b, char x, String input){	
+		String newstring = input.replaceAll("[^"+x+"]", "");		
 		return (newstring.length()>=a && newstring.length()<=b);
 	}
 
