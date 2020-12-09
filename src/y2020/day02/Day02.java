@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import adventOfCode.AdventOfCode;
 
 public class Day02 extends AdventOfCode{
+	private static final Pattern regexp = Pattern.compile("^([0-9]+)-(\\d+) (\\w): (.+)");
 	
 	public static void main(String[] args) {
 		new Day02().run();
@@ -22,15 +23,16 @@ public class Day02 extends AdventOfCode{
 		int counter = 0;
 		
 		for (String string : input) {
-			Matcher matcher = Pattern.compile("^([0-9]+)-(\\d+) (\\w): (.+)").matcher(string);
-			matcher.find();
-			
-			if(checkValidity(Integer.parseInt(matcher.group(1)), 
-					      Integer.parseInt(matcher.group(2)),
-					      matcher.group(3).charAt(0),
-					      matcher.group(4))) {
-				counter++;
+			Matcher matcher = regexp.matcher(string);
+			if(matcher.matches()) {
+				if(checkValidity(Integer.parseInt(matcher.group(1)), 
+						Integer.parseInt(matcher.group(2)),
+						matcher.group(3).charAt(0),
+						matcher.group(4))) {
+					counter++;
+				}	
 			}
+			
 		}
 		System.out.println(counter);
 		
@@ -41,14 +43,16 @@ public class Day02 extends AdventOfCode{
 		int counter = 0;
 		
 		for (String string : input) {
-			Matcher matcher = Pattern.compile("^([0-9]+)-(\\d+) (\\w): (.+)").matcher(string);
-			matcher.find();
-			
-			if(checkValidity2(Integer.parseInt(matcher.group(1)), 
-					      Integer.parseInt(matcher.group(2)),
-					      matcher.group(3).charAt(0),
-					      matcher.group(4))) {
-				counter++;
+			Matcher matcher = regexp.matcher(string);
+			if(matcher.matches()) {
+				if(checkValidity2(Integer.parseInt(matcher.group(1)), 
+						Integer.parseInt(matcher.group(2)),
+						matcher.group(3).charAt(0),
+						matcher.group(4))) {
+					counter++;
+				}
+			}else {
+				//throw
 			}
 		}
 		System.out.println(counter);
