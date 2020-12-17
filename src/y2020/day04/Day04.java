@@ -120,7 +120,6 @@ public class Day04 extends AdventOfCode{
 				return true;
 			}
 			return false;
-			
 		}
 		boolean validatePart2() {
 			
