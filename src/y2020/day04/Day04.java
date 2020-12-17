@@ -11,26 +11,6 @@ import adventOfCode.AdventOfCode;
 
 public class Day04 extends AdventOfCode{
 	
-	private static final Pattern reqByr = Pattern.compile("byr:(\\d+)(?:\\s|$)");
-	private static final Pattern regIyr = Pattern.compile("iyr:(\\d+)(?:\\s|$)");
-	//private static final Pattern regHcl = Pattern.compile("(?:hcl:(\\D{3})|hcl:(#[\\da-f]{6}))");
-	private static final Pattern regHcl = Pattern.compile("hcl:(#[0-9a-f]{6})(?:\\s|$)");
-	//private static final Pattern regEcl = Pattern.compile("(?:ecl:(\\D{3})|ecl:(#[\\da-f]{6}))");
-	private static final Pattern regEcl = Pattern.compile("ecl:(amb|blu|brn|gry|grn|hzl|oth)(?:\\s|$)");
-	private static final Pattern regPid = Pattern.compile("pid:(\\d{9})(?:\\s|$)");
-	private static final Pattern regCid = Pattern.compile("cid:(\\d{1,3})(?:\\s|$)");
-	private static final Pattern regEyr = Pattern.compile("eyr:(\\d+)(?:\\s|$)");
-	private static final Pattern regHgt = Pattern.compile("hgt:(\\d+)(in|cm)(?:\\s|$)");
-	
-//	private static final Pattern reqByr = Pattern.compile("byr:(\\S+)");
-//	private static final Pattern regIyr = Pattern.compile("iyr:(\\S+)");
-//	private static final Pattern regHcl = Pattern.compile("hcl:(\\S+)");
-//	private static final Pattern regEcl = Pattern.compile("ecl:(\\S+)");
-//	private static final Pattern regPid = Pattern.compile("pid:(\\S+)");
-//	private static final Pattern regCid = Pattern.compile("cid:(\\S+)");
-//	private static final Pattern regEyr = Pattern.compile("eyr:(\\S+)");
-//	private static final Pattern regHgt = Pattern.compile("hgt:(\\S+)");
-	
 	public static void main(String[] args) {
 		new Day04().run();
 	}
@@ -93,7 +73,6 @@ public class Day04 extends AdventOfCode{
 						passport.pid = value;
 						break;
 					case "cid":
-						passport.cid = value;
 						break;
 					case "eyr":
 						passport.eyr = value;
@@ -123,7 +102,6 @@ public class Day04 extends AdventOfCode{
 		String pid;
 		String eyr;
 		String hgt;
-		String cid;
 		
 		private static final Pattern yearPattern = Pattern.compile("(\\d+)");
 		private static final Pattern regHcl = Pattern.compile("(#[0-9a-f]{6})");
