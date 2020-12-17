@@ -11,14 +11,25 @@ import adventOfCode.AdventOfCode;
 
 public class Day04 extends AdventOfCode{
 	
-	private static final Pattern reqByr = Pattern.compile("byr:(\\d+)");
-	private static final Pattern regIyr = Pattern.compile("iyr:(\\d+)");
-	private static final Pattern regHcl = Pattern.compile("(?:hcl:(\\w+)|hcl:(#\\w+))");
-	private static final Pattern regEcl = Pattern.compile("(?:ecl:(\\w+)|ecl:(#\\w+))");
-	private static final Pattern regPid = Pattern.compile("pid:(\\d+)");
-	private static final Pattern regCid = Pattern.compile("cid:(\\d+)");
-	private static final Pattern regEyr = Pattern.compile("eyr:(\\d+)");
-	private static final Pattern regHgt = Pattern.compile("hgt:(\\d+)");
+	private static final Pattern reqByr = Pattern.compile("byr:(\\d+)(?:\\s|$)");
+	private static final Pattern regIyr = Pattern.compile("iyr:(\\d+)(?:\\s|$)");
+	//private static final Pattern regHcl = Pattern.compile("(?:hcl:(\\D{3})|hcl:(#[\\da-f]{6}))");
+	private static final Pattern regHcl = Pattern.compile("hcl:(#[0-9a-f]{6})(?:\\s|$)");
+	//private static final Pattern regEcl = Pattern.compile("(?:ecl:(\\D{3})|ecl:(#[\\da-f]{6}))");
+	private static final Pattern regEcl = Pattern.compile("ecl:(amb|blu|brn|gry|grn|hzl|oth)(?:\\s|$)");
+	private static final Pattern regPid = Pattern.compile("pid:(\\d{9})(?:\\s|$)");
+	private static final Pattern regCid = Pattern.compile("cid:(\\d{1,3})(?:\\s|$)");
+	private static final Pattern regEyr = Pattern.compile("eyr:(\\d+)(?:\\s|$)");
+	private static final Pattern regHgt = Pattern.compile("hgt:(\\d+)(in|cm)(?:\\s|$)");
+	
+//	private static final Pattern reqByr = Pattern.compile("byr:(\\S+)");
+//	private static final Pattern regIyr = Pattern.compile("iyr:(\\S+)");
+//	private static final Pattern regHcl = Pattern.compile("hcl:(\\S+)");
+//	private static final Pattern regEcl = Pattern.compile("ecl:(\\S+)");
+//	private static final Pattern regPid = Pattern.compile("pid:(\\S+)");
+//	private static final Pattern regCid = Pattern.compile("cid:(\\S+)");
+//	private static final Pattern regEyr = Pattern.compile("eyr:(\\S+)");
+//	private static final Pattern regHgt = Pattern.compile("hgt:(\\S+)");
 	
 	public static void main(String[] args) {
 		new Day04().run();
@@ -26,7 +37,6 @@ public class Day04 extends AdventOfCode{
 	
 	@Override
 	public List<String> readInput() throws Exception {
-		//return readFile("src/y2020/day04/testinput");
 		return readFile("src/y2020/day04/Day04Input.txt");
 	}
 
@@ -35,7 +45,7 @@ public class Day04 extends AdventOfCode{
 		List<Passport> passports = parseInput();
 		int counter = 0;
 		for (Passport passport : passports) {
-			if(passport.validate()) {
+			if(passport.validatePart1()) {
 				counter++;
 			}
 		}
@@ -45,128 +55,158 @@ public class Day04 extends AdventOfCode{
 
 	@Override
 	public void part2() throws Exception {
-		// TODO Auto-generated method stub
-		
+		List<Passport> passports = parseInput();
+		int counter = 0;
+		for (Passport passport : passports) {
+			if(passport.validatePart2()) {
+				counter++;
+			}
+		}
+		System.out.println(counter);
 	}
 	
 	private List<Passport> parseInput() {
 
 		List<Passport> passports = new ArrayList<>();
-		String byr = "";
-		String iyr = "";
-		String hcl = "";
-		String ecl = "";
-		String pid = "";
-		String cid = "";
-		String eyr = "";
-		String hgt = "";
-		Matcher matcher;
-		for (String string : input) {
-			if(!string.isEmpty()) {
-				
-				matcher = reqByr.matcher(string);
-				if(matcher.find()) {
-					byr = matcher.group(1);
-				}
-				matcher = regIyr.matcher(string);
-				if(matcher.find()) {
-					iyr = matcher.group(1);
-				}
-				matcher = regHcl.matcher(string);
-				if(matcher.find()) {
-					if(matcher.group(2) == null) {
-						hcl = matcher.group(1);
-					}else {
-						hcl = matcher.group(2);
+		Passport passport = new Passport();
+		
+		for (String line : input) {
+			if(!line.isEmpty()) {
+				for (String keyValue : line.split(" ")) {
+					String[] split = keyValue.split(":");
+					String key = split[0];
+					String value = split[1];
+					switch (key) {
+					case "byr":
+						passport.byr = value;
+						break;
+					case "iyr":
+						passport.iyr = value;
+						break;
+					case "hcl":
+						passport.hcl = value;
+						break;
+					case "ecl":
+						passport.ecl = value;
+						break;
+					case "pid":
+						passport.pid = value;
+						break;
+					case "cid":
+						passport.cid = value;
+						break;
+					case "eyr":
+						passport.eyr = value;
+						break;
+					case "hgt":
+						passport.hgt = value;
+						break;
+					default:
+						throw new RuntimeException();
 					}
-				}
-				matcher = regEcl.matcher(string);
-				if(matcher.find()) {
-					if(matcher.group(2) == null) {
-						ecl = matcher.group(1);
-					}else {
-						ecl = matcher.group(2);
-					}
-				}
-				matcher = regPid.matcher(string);
-				if(matcher.find()) {
-					pid = matcher.group(1);
-				}
-				matcher = regCid.matcher(string);
-				if(matcher.find()) {
-					cid = matcher.group(1);
-				}
-				matcher = regEyr.matcher(string);
-				if(matcher.find()) {
-					eyr = matcher.group(1);
-				}
-				matcher = regHgt.matcher(string);
-				if(matcher.find()) {
-					hgt = matcher.group(1);
 				}
 			}else {
-				passports.add(new Passport(byr,iyr,hcl,ecl,pid,cid,eyr,hgt));
-				byr = "";
-				iyr = "";
-				hcl = "";
-				ecl = "";
-				pid = "";
-				cid = "";
-				eyr = "";
-				hgt = "";
+				passports.add(passport);
+				passport = new Passport();
 			}
 		}
-		passports.add(new Passport(byr,iyr,hcl,ecl,pid,cid,eyr,hgt));
-		
+		passports.add(passport);
 		return passports;
 	}
 	
 	private static class Passport {
 
-		String byr = "";
-		String iyr = "";
-		String hcl = "";
-		String ecl = "";
-		String pid = "";
-		String cid = "";
-		String eyr = "";
-		String hgt = "";
+		String byr;
+		String iyr;
+		String hcl;
+		String ecl;
+		String pid;
+		String eyr;
+		String hgt;
+		String cid;
 		
-		public Passport(String byr, String iyr, String hcl, String ecl, String pid, String cid, String eyr, String hgt) {
-			this.byr = byr;
-			this.iyr = iyr;
-			this.hcl = hcl;
-			this.ecl = ecl;
-			this.pid = pid;
-			this.cid = cid;
-			this.eyr = eyr;
-			this.hgt = hgt;
-		}
-		
-		boolean validate() {
-			System.out.println("byr:"+byr);
-			System.out.println("iyr:"+iyr);
-			System.out.println("hcl:"+hcl);
-			System.out.println("ecl:"+ecl);
-			System.out.println("pid:"+pid);
-			System.out.println("cid:"+cid);
-			System.out.println("eyr:"+eyr);
-			System.out.println("hgt:"+hgt);
-			if(!byr.equals("") &&
-			   !iyr.equals("") &&
-			   !hcl.equals("") &&
-			   !ecl.equals("") &&
-			   !pid.equals("") &&
-			   !eyr.equals("") &&
-			   !hgt.equals("")) {
-				System.out.println("returning true");
-				System.out.println();
+		private static final Pattern yearPattern = Pattern.compile("(\\d+)");
+		private static final Pattern regHcl = Pattern.compile("(#[0-9a-f]{6})");
+		private static final Pattern regEcl = Pattern.compile("(amb|blu|brn|gry|grn|hzl|oth)");
+		private static final Pattern regPid = Pattern.compile("(\\d{9})");
+		private static final Pattern regHgt = Pattern.compile("(\\d+)(in|cm)");
+	
+		boolean validatePart1() {
+			if(byr != null &&
+			   iyr != null &&
+			   hcl != null &&
+			   ecl != null &&
+			   pid != null &&
+			   eyr != null &&
+			   hgt != null) {
 				return true;
 			}
-			System.out.println("returning false");
-			System.out.println();
 			return false;
 			
+		}
+		boolean validatePart2() {
+			
+			if(!validatePart1()) {
+				return false;
+			}
+			//byr
+			Matcher matcher = yearPattern.matcher(byr);
+			if(!matcher.matches()) {
+				return false;
+			}
+			int value = Integer.parseInt(matcher.group(1));
+			if(value < 1920 || value > 2002) {
+				return false;
+			}
+			//iyr
+			matcher = yearPattern.matcher(iyr);
+			if(!matcher.matches()) {
+				return false;
+			}
+			value = Integer.parseInt(matcher.group(1));
+			if(value < 2010 || value > 2020) {
+				return false;
+			}
+			//eyr
+			matcher = yearPattern.matcher(eyr);
+			if(!matcher.matches()) {
+				return false;
+			}
+			value = Integer.parseInt(matcher.group(1));
+			if(value < 2020 || value > 2030) {
+				return false;
+			}
+			//hgt
+			matcher = regHgt.matcher(hgt);
+			if(!matcher.matches()) {
+				return false;
+			}
+			value = Integer.parseInt(matcher.group(1));
+			if(matcher.group(2).equals("cm")) {
+				if(value < 150 || value > 193) {
+					return false;
+				}	
+			}else if(matcher.group(2).equals("in")) {
+				if(value < 59 || value > 76) {
+					return false;
+				}
+			}
+			//hcl
+			matcher = regHcl.matcher(hcl);
+			if(!matcher.matches()) {
+				return false;
+			}
+			//ecl
+			matcher = regEcl.matcher(ecl);
+			if(!matcher.matches()) {
+				return false;
+			}
+			//pid
+			matcher = regPid.matcher(pid);
+			if(!matcher.matches()) {
+				return false;
+			}
+			return true;
 		}
 	}
 }
